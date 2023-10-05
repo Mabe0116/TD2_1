@@ -4,7 +4,7 @@
 
 GameScene::GameScene() {}
 
-GameScene::~GameScene() {}
+GameScene::~GameScene() { delete score_; }
 
 void GameScene::Initialize() {
 
@@ -12,12 +12,11 @@ void GameScene::Initialize() {
 	input_ = Input::GetInstance();
 	audio_ = Audio::GetInstance();
 
-	player_ = new Player();
-
-	player_->Initialize();
+	score_ = new Score();
+	score_->Initialize();
 }
 
-void GameScene::Update() {}
+void GameScene::Update() { score_->Update(); }
 
 void GameScene::Draw() {
 
