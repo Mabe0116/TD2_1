@@ -45,6 +45,12 @@ private: // メンバ変数
 	Input* input_ = nullptr;
 	Audio* audio_ = nullptr;
 
+	Model* leg1_ = nullptr;
+	Model* leg2_ = nullptr;
+
+	// プレイヤーの片足
+	WorldTransform worldTransforms_[5];
+
 	/// <summary>
 	/// ゲームシーン用
 	/// </summary>
