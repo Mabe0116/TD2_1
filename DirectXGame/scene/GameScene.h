@@ -8,6 +8,7 @@
 #include "Sprite.h"
 #include "ViewProjection.h"
 #include "WorldTransform.h"
+#include"Player.h"
 
 /// <summary>
 /// ゲームシーン
@@ -50,6 +51,8 @@ private: // メンバ変数
 
 	// プレイヤーの片足
 	WorldTransform worldTransforms_[5];
+
+	Player* player_ = nullptr;
 
 	/// <summary>
 	/// ゲームシーン用

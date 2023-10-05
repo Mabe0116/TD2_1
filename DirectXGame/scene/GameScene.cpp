@@ -11,6 +11,10 @@ void GameScene::Initialize() {
 	dxCommon_ = DirectXCommon::GetInstance();
 	input_ = Input::GetInstance();
 	audio_ = Audio::GetInstance();
+
+	player_ = new Player();
+
+	player_->Initialize();
 }
 
 void GameScene::Update() {}
