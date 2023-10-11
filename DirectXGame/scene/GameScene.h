@@ -8,6 +8,7 @@
 #include "Sprite.h"
 #include "ViewProjection.h"
 #include "WorldTransform.h"
+#include <Tree.h>
 
 /// <summary>
 /// ゲームシーン
@@ -50,6 +51,17 @@ private: // メンバ変数
 
 	// プレイヤーの片足
 	WorldTransform worldTransforms_[5];
+
+	//柱
+	Model* modelTree_ = nullptr;
+	Tree* tree_ = nullptr;
+
+	// カメラ
+	ViewProjection viewProjection_;
+
+	WorldTransform worldTransform_;
+
+	
 
 	/// <summary>
 	/// ゲームシーン用

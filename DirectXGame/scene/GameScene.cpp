@@ -4,13 +4,15 @@
 
 GameScene::GameScene() {}
 
-GameScene::~GameScene() {}
+GameScene::~GameScene() { delete modelTree_; }
 
 void GameScene::Initialize() {
 
 	dxCommon_ = DirectXCommon::GetInstance();
 	input_ = Input::GetInstance();
 	audio_ = Audio::GetInstance();
+
+	
 }
 
 void GameScene::Update() {}
@@ -41,6 +43,7 @@ void GameScene::Draw() {
 	/// <summary>
 	/// ここに3Dオブジェクトの描画処理を追加できる
 	/// </summary>
+	//modelTree_->Draw(worldTransform_,viewProjection_);
 
 	// 3Dオブジェクト描画後処理
 	Model::PostDraw();
