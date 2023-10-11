@@ -9,6 +9,9 @@
 #include "ViewProjection.h"
 #include "WorldTransform.h"
 #include"Score.h"
+#include"Obstacles.h"
+#include"Cylinder.h"
+#include"DebugCamera.h"
 
 /// <summary>
 /// ゲームシーン
@@ -49,10 +52,26 @@ private: // メンバ変数
 	Model* leg1_ = nullptr;
 	Model* leg2_ = nullptr;
 
+
+
 	// プレイヤーの片足
 	WorldTransform worldTransforms_[5];
 
 	Score* score_ = nullptr;
+
+	Obstacles* obstacles_ = nullptr;
+
+	Model* model_ = nullptr;
+
+	Cylinder* cylinder_ = nullptr;
+	Model* modelcylinder_ = nullptr;
+
+	ViewProjection viewProjection_;
+	//デバッグカメラ
+	DebugCamera* debugCamera_=nullptr;
+	//デバッグカメラ有効
+	bool isDebugCameraAcctive_ = false;
+	
 
 	/// <summary>
 	/// ゲームシーン用
