@@ -9,6 +9,7 @@
 #include "ViewProjection.h"
 #include "WorldTransform.h"
 #include "Player.h"
+#include <Tree.h>
 
 /// <summary>
 /// ゲームシーン
@@ -63,9 +64,6 @@ private: // メンバ変数
 	//柱
 	Model* modelTree_ = nullptr;
 	Tree* tree_ = nullptr;
-
-	// カメラ
-	ViewProjection viewProjection_;
 
 	WorldTransform worldTransform_;
 
