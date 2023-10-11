@@ -293,6 +293,10 @@ Vector3 Transform(const Vector3& vector, const Matrix4x4& matrix) {
 	return result;
 }
 
+float ToRadian(int degree) { 
+	return (float)degree * (3.14f / 180.0f);
+}
+
 
 
 
