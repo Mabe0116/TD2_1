@@ -90,8 +90,6 @@ private: // メンバ変数
 	Cylinder* cylinder_ = nullptr;
 	Model* modelcylinder_ = nullptr;
 
-	ViewProjection viewProjection_;
-
 	RailCamera* railCamera_ = nullptr;
 
 	 // 敵発生コマンド
