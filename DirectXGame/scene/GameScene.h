@@ -12,6 +12,10 @@
 #include"Obstacles.h"
 #include"Cylinder.h"
 #include"DebugCamera.h"
+#include"RailCamera.h"
+#include <list>
+#include <sstream>
+#include <fstream>
 
 /// <summary>
 /// ゲームシーン
@@ -44,6 +48,18 @@ public: // メンバ関数
 	/// </summary>
 	void Draw();
 
+	/// <summary>
+	/// 敵発生データの読み込み
+	/// </summary>
+	void LoadEnemyPopData();
+
+	/// <summary>
+	/// 敵発生コマンドの更新
+	/// </summary>
+	void UpdateEnemyPopCommands();
+
+	void ObstaclesGeneration(const  Vector3& position);
+
 private: // メンバ変数
 	DirectXCommon* dxCommon_ = nullptr;
 	Input* input_ = nullptr;
@@ -60,6 +76,7 @@ private: // メンバ変数
 	Score* score_ = nullptr;
 
 	Obstacles* obstacles_ = nullptr;
+	std::list<Obstacles*> obstacless_;
 
 	Model* model_ = nullptr;
 
@@ -67,6 +84,12 @@ private: // メンバ変数
 	Model* modelcylinder_ = nullptr;
 
 	ViewProjection viewProjection_;
+
+	RailCamera* railCamera_ = nullptr;
+
+	 // 敵発生コマンド
+	std::stringstream enemyPopCommands;
+
 	//デバッグカメラ
 	DebugCamera* debugCamera_=nullptr;
 	//デバッグカメラ有効
