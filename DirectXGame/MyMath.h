@@ -30,4 +30,6 @@ Matrix4x4 MakeViewportMatrix(
 
 Vector3 Transform(const Vector3& vector, const Matrix4x4& matrix);
 
+Vector3 Add2(const Vector3& v1, const Vector3& v2);
+
 float ToRadian(int degree);
