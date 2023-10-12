@@ -25,18 +25,29 @@ public:		// メンバ関数
 private:	// メンバ変数
 	enum class Parts{
 		kBody,
+
 		kRootLeftLeg,
 		kRootRightLeg,
 		kLeftLeg,
-		kRightLeg
+		kRightLeg,
+
+		kRootLeftHand,
+		kRootRightHand,
+		kLeftHand,
+		kRightHand,
 		
+
+		kMaxParts,
 	};
 
 	Model* leg_ = nullptr;
 	Model* body_ = nullptr;
-	static const int kMaxParts = 5;
-	WorldTransform worldTransforms_[kMaxParts];
+	Model* hand_ = nullptr;
+	//static const int kMaxParts = 5;
+	WorldTransform worldTransforms_[(int)Parts::kMaxParts];
 	int32_t leftLegRotate_ = 0u;  
 	int32_t rightLegRotate_ = 0u;
+	int32_t leftHandRotate_ = 0u;
+	int32_t rightHandRotate_ = 0u;
 	int32_t rotationSpeed_ = 1;
 };
