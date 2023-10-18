@@ -64,6 +64,8 @@ public: // メンバ関数
 
 	void ObstaclesGeneration(const Vector3& position, int radian);
 
+	void CheckAllCollisions();
+
 private: // メンバ変数
 	DirectXCommon* dxCommon_ = nullptr;
 	Input* input_ = nullptr;
@@ -88,6 +90,7 @@ private: // メンバ変数
 	Score* score_ = nullptr;
 
 	Obstacles* obstacles_ = nullptr;
+	// 障害物リスト
 	std::list<Obstacles*> obstacless_;
 
 	Cylinder* cylinder_ = nullptr;

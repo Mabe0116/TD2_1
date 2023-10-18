@@ -20,6 +20,11 @@ public:
 
 	void SetCylinder(Cylinder* cylinder) { cylinder_ = cylinder; }
 
+	// 衝突を検出したら呼び出されるコールバック関数
+	void OnCollision();
+
+	bool IsDead() const { return isDead_; }
+
 	/// 親となるワールドトランスフォームをセット
 	/// </summary>
 	/// <param name="parent">親となるワールドトランスフォーム</param>
@@ -47,5 +52,6 @@ public:
 		//スタート開始から何秒か待つ用の変数
 	    int32_t timer_;
 	    int32_t timerspeed_;
-
+	    // デスフラグ
+	    bool isDead_ = false;
 };

@@ -27,6 +27,9 @@ public: // メンバ関数
 
 	const WorldTransform& GetWorldTransform() { return worldTransforms_[(int)Parts::kBody]; }
 	
+	// 衝突を検出したら呼び出されるコールバック関数
+	void OnCollision();
+
 	// ワールド座標を取得
 	Vector3 GetWorldPosition(){// ワールド座標を入れる変数
 		Vector3 worldPos;
