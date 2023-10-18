@@ -20,15 +20,15 @@ void Obstacles::Update() {
 	
 
 	worldTransform_.translation_.x = 0.0f + cosf(radian_) * randX;
-	worldTransform_.translation_.z = 0.0f + sinf(radian_) * -randX;
+	worldTransform_.translation_.z = 0.0f + sinf(radian_) * randX;
 
 	worldTransform_.translation_ = Subtract(worldTransform_.translation_, velocity_);
 	if (worldTransform_.translation_.y <= -50)
 	{
 		
 		worldTransform_.translation_.y = 50;
-		randX = rand() % 10;
-		//worldTransform_.translation_.x = (float)randX;
+		randX = rand() % 6-5;
+		
 	
 	}
 	

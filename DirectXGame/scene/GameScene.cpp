@@ -142,16 +142,15 @@ void GameScene::Draw() {
 #pragma endregion
 }
 
-void GameScene::ObstaclesGeneration(const Vector3& position) {
+void GameScene::ObstaclesGeneration(const Vector3& position,int radian) {
 
 	Obstacles* obstacles = new Obstacles();
-	float radian = rand() / static_cast<float>(1);
+	
+	
 	const float kObstaclesSpeed = 0.5f;
 	Vector3 velocity = {0.0f, kObstaclesSpeed, 0.0f};
-	obstacles->Initialize(model_, (float)radian, position, velocity);
-	// obstacles->SetGameScene(this);
-	// obstacles->SetCylinder(cylinder_);
-	// obstacles->SetParent(&railCamera_->GetWorldTransform());
+	obstacles->Initialize(model_, ToRadian(radian), position, velocity);
+	
 	obstacless_.push_back(obstacles);
 }
 
@@ -213,8 +212,10 @@ void GameScene::UpdateEnemyPopCommands() {
 			getline(line_stream, word, ',');
 			float z = (float)std::atof(word.c_str());
 
+			int radian = rand() % 361;
+
 			// 敵を発生させる
-			ObstaclesGeneration(Vector3(x, y, z));
+			ObstaclesGeneration(Vector3(x, y, z),radian);
 		}
 
 		// WAITコマンド

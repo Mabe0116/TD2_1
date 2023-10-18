@@ -59,7 +59,7 @@ public: // メンバ関数
 	/// </summary>
 	void UpdateEnemyPopCommands();
 
-	void ObstaclesGeneration(const  Vector3& position);
+	void ObstaclesGeneration(const  Vector3& position,int radian);
 
 private: // メンバ変数
 	DirectXCommon* dxCommon_ = nullptr;
