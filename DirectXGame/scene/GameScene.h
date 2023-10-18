@@ -86,20 +86,10 @@ private: // メンバ変数
 	//追従カメラ, カメラの親がプレイヤー、プレイヤーの親が円柱
 	FollowCamera* followCamera_ = nullptr;
 
-	//Model* leg1_ = nullptr;
-	//Model* leg2_ = nullptr;
-
-
-
-	// プレイヤーの片足
-	WorldTransform worldTransforms_[5];
-
 	Score* score_ = nullptr;
 
 	Obstacles* obstacles_ = nullptr;
 	std::list<Obstacles*> obstacless_;
-
-	Model* model_ = nullptr;
 
 	Cylinder* cylinder_ = nullptr;
 	Model* modelcylinder_ = nullptr;
@@ -109,8 +99,6 @@ private: // メンバ変数
 	 // 敵発生コマンド
 	std::stringstream enemyPopCommands;
 
-	//デバッグカメラ
-	DebugCamera* debugCamera_=nullptr;
 	//デバッグカメラ有効
 	bool isDebugCameraAcctive_ = false;
 	
