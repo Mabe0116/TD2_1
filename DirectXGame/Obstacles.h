@@ -40,7 +40,12 @@ public:
 		GameScene* gameScene_ = nullptr;
 		//障害物の落下速度
 		Vector3 velocity_;
-		//どの位置に行くかのランダムな変数
+		//条件式に入れる用のランダムな変数
 		int32_t randX;
+	    // どの位置に行く用の変数
+		float position_;
+		//スタート開始から何秒か待つ用の変数
+	    int32_t timer_;
+	    int32_t timerspeed_;
 
 };
