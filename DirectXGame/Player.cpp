@@ -4,23 +4,35 @@
 #define LEG_ROTATE_MAX 30
 
 void Player::Initialize() {
+
+	// 回転速度
+	//const float RotateSpeed = 0.1f;
+
+	/*if (input_->PushKey(DIK_SPACE)) {
+		worldTransform_.rotation_.y += RotateSpeed;
+	}*/
+
+
+	// シングルトンインスタンスを取得する
+	input_ = Input::GetInstance();
+
+
 	body_ = Model::Create();
 	leg_ = Model::CreateFromOBJ("Leg");
 
-	worldTransforms_[static_cast<int>(Parts::kRootLeftLeg)].parent_ =
-	    &worldTransforms_[static_cast<int>(Parts::kBody)];
-	worldTransforms_[static_cast<int>(Parts::kRootRightLeg)].parent_ =
-	    &worldTransforms_[static_cast<int>(Parts::kBody)];
-	worldTransforms_[static_cast<int>(Parts::kLeftLeg)].parent_ =
-	    &worldTransforms_[static_cast<int>(Parts::kRootLeftLeg)];
-	worldTransforms_[static_cast<int>(Parts::kRightLeg)].parent_ =
-	    &worldTransforms_[static_cast<int>(Parts::kRootRightLeg)];
+	//worldTransforms_[static_cast<int>(Parts::kBody)].parent_ =&worldTransforms_[static_cast<int>(Parts::kBody)];
+
+	worldTransforms_[static_cast<int>(Parts::kRootLeftLeg)].parent_=&worldTransforms_[static_cast<int>(Parts::kBody)];
+	worldTransforms_[static_cast<int>(Parts::kRootRightLeg)].parent_=&worldTransforms_[static_cast<int>(Parts::kBody)];
+	worldTransforms_[static_cast<int>(Parts::kLeftLeg)].parent_=&worldTransforms_[static_cast<int>(Parts::kRootLeftLeg)];
+	worldTransforms_[static_cast<int>(Parts::kRightLeg)].parent_=&worldTransforms_[static_cast<int>(Parts::kRootRightLeg)];
 
 	for (int i = 0; i < kMaxParts; i++) {
 		// 定数バッファ作成、これ呼ばないとTranferMatrixでエラーが起きる
 		worldTransforms_[i].Initialize();
 	}
-	worldTransforms_[static_cast<int>(Parts::kBody)].rotation_.y = -ToRadian(60);
+	worldTransforms_[static_cast<int>(Parts::kBody)].rotation_ = {ToRadian(270), -ToRadian(90), 0};
+	worldTransforms_[static_cast<int>(Parts::kBody)].translation_ = {10, 0.0f,0};
 	worldTransforms_[static_cast<int>(Parts::kLeftLeg)].translation_ = {0, -2.5f, 0};
 	worldTransforms_[static_cast<int>(Parts::kRightLeg)].translation_ = {0, -2.5f, 0};
 	worldTransforms_[static_cast<int>(Parts::kRootLeftLeg)].translation_ = {-2, 0.0f, 0};
@@ -44,6 +56,7 @@ void Player::Update() {
 		// アフィン変換してワールド行列計算、ワールド行列を転送
 		worldTransforms_[i].UpdateMatrix();
 	}
+	
 }
 
 void Player::Draw(const ViewProjection& viewProjection) {
