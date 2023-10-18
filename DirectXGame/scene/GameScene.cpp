@@ -14,10 +14,17 @@ GameScene::~GameScene() {
 	delete debugCamera_;
 	delete railCamera_;
 	delete player_;
+	delete modelTree_;
+	delete tree_;
+	delete debugCamera_;
+	delete followCamera_;
 }
 
 void GameScene::Initialize() {
 
+	//デバッグカメラの生成
+	debugCamera_=new DebugCamera(1280,720);
+	
 	dxCommon_ = DirectXCommon::GetInstance();
 	input_ = Input::GetInstance();
 	audio_ = Audio::GetInstance();
@@ -28,6 +35,13 @@ void GameScene::Initialize() {
 	/*Vector3 position = {0.0f, 0.0f, 0.0f};
 	ObstaclesGeneration(position);*/
 	LoadEnemyPopData();
+
+	// 柱の初期化
+	modelTree_ = Model::CreateFromOBJ("tree", true);
+	Vector3 position_(0, 0, 0);
+	tree_ = new Tree();
+	tree_->Initialize(modelTree_,position_);
+	player_->SetParent(&tree_->GetWorldTransform());
 
 	cylinder_ = new Cylinder();
 	modelcylinder_ = Model::CreateFromOBJ("cylinder", true);
@@ -45,6 +59,8 @@ void GameScene::Initialize() {
 	railCamera_->Initialize(Cameravelocity, translation, rotation);
 
 	viewProjection_.Initialize();
+	worldTransform_.Initialize();
+
 
 	// 円柱とレールカメラの親子関係を結ぶ
 	cylinder_->SetParent(&railCamera_->GetWorldTransform());
@@ -53,8 +69,32 @@ void GameScene::Initialize() {
 	player_ = new Player();
 	player_->Initialize();
 }
+	// 追従カメラの生成
+	followCamera_ = new FollowCamera;
+	// 追従カメラの初期化
+	followCamera_->Initialize();
+	// 自キャラのワールドトランスフォームを追従カメラにセット
+	followCamera_->SetTarget(&player_->GetWorldTransform());
+}
 
 void GameScene::Update() {
+	//viewProjection_.UpdateMatrix();
+	
+	// デバッグカメラの更新
+	//debugCamera_->Update();
+	
+
+	//追従カメラの更新
+	followCamera_->Update();
+	viewProjection_.matProjection = followCamera_->GetViewProjection().matProjection;
+	viewProjection_.matView= followCamera_->GetViewProjection().matView;
+
+
+	
+	player_->Update();
+	tree_->Update();
+
+	
 	for (Obstacles* obstacles : obstacless_) {
 		obstacles->Update();
 	}
@@ -115,8 +155,19 @@ void GameScene::Draw() {
 	/// <summary>
 	/// ここに3Dオブジェクトの描画処理を追加できる
 	/// </summary>
+	
+	/*tree_->Draw(viewProjection_);
 
-	player_->Draw(viewProjection_);
+	player_->Draw(viewProjection_);*/
+
+	tree_->Draw( debugCamera_->GetViewProjection());
+	player_->Draw(debugCamera_->GetViewProjection());
+
+	/*leg1_->Draw(worldTransforms_[0],viewProjection_ );
+	leg2_->Draw(worldTransforms_[1],viewProjection_ );
+	leg1_->Draw(worldTransforms_[2],viewProjection_ );
+	leg2_->Draw(worldTransforms_[3],viewProjection_ );
+	leg1_->Draw(worldTransforms_[4], viewProjection_);*/
 
 	for (Obstacles* obstacles : obstacless_) {
 		obstacles->Draw(viewProjection_);

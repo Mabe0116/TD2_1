@@ -17,6 +17,9 @@
 #include <sstream>
 #include <fstream>
 #include "Player.h"
+#include <Tree.h>
+#include "DebugCamera.h"
+#include "FollowCamera.h"
 
 /// <summary>
 /// ゲームシーン
@@ -66,12 +69,22 @@ private: // メンバ変数
 	DirectXCommon* dxCommon_ = nullptr;
 	Input* input_ = nullptr;
 	Audio* audio_ = nullptr;
+	// モデル
+	Model* model_ = nullptr;
 	// メインカメラ
 	ViewProjection viewProjection_;
+	WorldTransform worldTransform_;
+	//テクスチャハンドル
+	uint32_t textureHandle_ = 0;
 
 	Player* player_ = nullptr;
 	Model* body_ = nullptr;
 	Model* leg_ = nullptr;
+
+	//デバッグカメラ
+	DebugCamera* debugCamera_ = nullptr;
+	//追従カメラ, カメラの親がプレイヤー、プレイヤーの親が円柱
+	FollowCamera* followCamera_ = nullptr;
 
 	//Model* leg1_ = nullptr;
 	//Model* leg2_ = nullptr;
@@ -101,6 +114,13 @@ private: // メンバ変数
 	//デバッグカメラ有効
 	bool isDebugCameraAcctive_ = false;
 	
+
+	//柱
+	Model* modelTree_ = nullptr;
+	Tree* tree_ = nullptr;
+
+
+		
 
 	/// <summary>
 	/// ゲームシーン用
