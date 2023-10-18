@@ -4,18 +4,9 @@
 #define LEG_ROTATE_MAX 30
 
 void Player::Initialize() {
-
-	// 回転速度
-	// const float RotateSpeed = 0.1f;
-
-	/*if (input_->PushKey(DIK_SPACE)) {
-	    worldTransform_.rotation_.y += RotateSpeed;
-	}*/
-
 	// シングルトンインスタンスを取得する
 	input_ = Input::GetInstance();
 
-	body_ = Model::Create();
 	body_ = Model::CreateFromOBJ("body");
 	leg_ = Model::CreateFromOBJ("Leg");
 	hand_ = Model::CreateFromOBJ("Hand");
@@ -87,19 +78,10 @@ void Player::Update() {
 		rotationSpeed_ = -rotationSpeed_;
 		// rotationSpeed_ *= -1;
 	}
-	for (int i = 0; i < (int)Parts::kMaxParts; i++) {
-		// アフィン変換 -> 回転や拡大縮小、平行移動行うための行列
-		// worldTransformのrotation,translation,scale
-		// アフィン変換してワールド行列計算、ワールド行列を転送
-		worldTransforms_[i].UpdateMatrix();
-	}
-
+	
 	// 手
 	leftHandRotate_ += rotationSpeed_; // leftHandRotate_ = leftHandRotate_ + rotationSpeed_
-	//if (leftHandRotate_ >= HAND_ROTATE_MAX || leftHandRotate_ <= -HAND_ROTATE_MAX) {
-	//	rotationSpeed_ = -rotationSpeed_;
-	//	// rotationSpeed_ *= -1;
-	//}
+	
 	for (int i = 0; i < (int)Parts::kMaxParts; i++) {
 		// アフィン変換 -> 回転や拡大縮小、平行移動行うための行列
 		// worldTransformのrotation,translation,scale
