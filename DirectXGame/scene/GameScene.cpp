@@ -1,7 +1,6 @@
 #include "GameScene.h"
 #include "ImGuiManager.h"
 #include "MyMath.h"
-#include "Player.h"
 #include "TextureManager.h"
 #include <cassert>
 
@@ -14,9 +13,16 @@ GameScene::~GameScene() {
 	delete debugCamera_;
 	delete railCamera_;
 	delete player_;
+	delete modelTree_;
+	delete tree_;
+	delete debugCamera_;
+	delete followCamera_;
 }
 
 void GameScene::Initialize() {
+
+	// デバッグカメラの生成
+	debugCamera_ = new DebugCamera(1280, 720);
 
 	dxCommon_ = DirectXCommon::GetInstance();
 	input_ = Input::GetInstance();
@@ -25,8 +31,7 @@ void GameScene::Initialize() {
 
 	score_ = new Score();
 	score_->Initialize();
-	/*Vector3 position = {0.0f, 0.0f, 0.0f};
-	ObstaclesGeneration(position);*/
+
 	LoadEnemyPopData();
 
 	cylinder_ = new Cylinder();
@@ -45,6 +50,7 @@ void GameScene::Initialize() {
 	railCamera_->Initialize(Cameravelocity, translation, rotation);
 
 	viewProjection_.Initialize();
+	worldTransform_.Initialize();
 
 	// 円柱とレールカメラの親子関係を結ぶ
 	cylinder_->SetParent(&railCamera_->GetWorldTransform());
@@ -52,39 +58,55 @@ void GameScene::Initialize() {
 
 	player_ = new Player();
 	player_->Initialize();
+	// 柱の初期化
+	modelTree_ = Model::CreateFromOBJ("tree", true);
+	Vector3 position_(0, 0, 0);
+	tree_ = new Tree();
+	tree_->Initialize(modelTree_, position_);
+	player_->SetParent(&tree_->GetWorldTransform());
+
+	// 追従カメラの生成
+	followCamera_ = new FollowCamera;
+	// 追従カメラの初期化
+	followCamera_->Initialize();
+	// 自キャラのワールドトランスフォームを追従カメラにセット
+	followCamera_->SetTarget(&player_->GetWorldTransform());
 }
 
 void GameScene::Update() {
-	for (Obstacles* obstacles : obstacless_) {
-		obstacles->Update();
-	}
-
-	cylinder_->Update();
-	debugCamera_->Update();
 #ifdef _DEBUG
 	if (input_->TriggerKey(DIK_SPACE)) {
 		isDebugCameraAcctive_ = true;
 	}
 	if (isDebugCameraAcctive_) {
 
+		debugCamera_->Update();
 		viewProjection_.matView = debugCamera_->GetViewProjection().matView;
 		viewProjection_.matProjection = debugCamera_->GetViewProjection().matProjection;
 		// ビュープロジェクション行列の転送
 		viewProjection_.TransferMatrix();
 	} else {
+		// 追従カメラの更新
+		followCamera_->Update();
+		viewProjection_.matProjection = followCamera_->GetViewProjection().matProjection;
+		viewProjection_.matView = followCamera_->GetViewProjection().matView;
 		// ビュープロジェクション行列の更新と転送
-		viewProjection_.UpdateMatrix();
+		// viewProjection_.UpdateMatrix();
 	}
 #endif
-	viewProjection_.matView = railCamera_->GetViewProjection().matView;
-	viewProjection_.matProjection = railCamera_->GetViewProjection().matProjection;
+
+	player_->Update();
+	tree_->Update();
+
+	//
+	for (Obstacles* obstacles : obstacless_) {
+		obstacles->Update();
+	}
+
+	cylinder_->Update();
 
 	// ビュープロジェクション行列の転送
 	viewProjection_.TransferMatrix();
-
-	player_->Update();
-
-	railCamera_->Update();
 
 	UpdateEnemyPopCommands();
 }
@@ -116,13 +138,24 @@ void GameScene::Draw() {
 	/// ここに3Dオブジェクトの描画処理を追加できる
 	/// </summary>
 
-	player_->Draw(viewProjection_);
+	/*tree_->Draw(viewProjection_);
+
+	player_->Draw(viewProjection_);*/
+
+	tree_->Draw(debugCamera_->GetViewProjection());
+	player_->Draw(debugCamera_->GetViewProjection());
+
+	/*leg1_->Draw(worldTransforms_[0],viewProjection_ );
+	leg2_->Draw(worldTransforms_[1],viewProjection_ );
+	leg1_->Draw(worldTransforms_[2],viewProjection_ );
+	leg2_->Draw(worldTransforms_[3],viewProjection_ );
+	leg1_->Draw(worldTransforms_[4], viewProjection_);*/
 
 	for (Obstacles* obstacles : obstacless_) {
 		obstacles->Draw(viewProjection_);
 	}
 
-	cylinder_->Draw(viewProjection_);
+	//cylinder_->Draw(viewProjection_);
 
 	// 3Dオブジェクト描画後処理
 	Model::PostDraw();
@@ -142,15 +175,14 @@ void GameScene::Draw() {
 #pragma endregion
 }
 
-void GameScene::ObstaclesGeneration(const Vector3& position,int radian) {
+void GameScene::ObstaclesGeneration(const Vector3& position, int radian) {
 
 	Obstacles* obstacles = new Obstacles();
-	
-	
+
 	const float kObstaclesSpeed = 0.5f;
 	Vector3 velocity = {0.0f, kObstaclesSpeed, 0.0f};
 	obstacles->Initialize(model_, ToRadian(radian), position, velocity);
-	
+
 	obstacless_.push_back(obstacles);
 }
 
@@ -215,7 +247,7 @@ void GameScene::UpdateEnemyPopCommands() {
 			int radian = rand() % 361;
 
 			// 敵を発生させる
-			ObstaclesGeneration(Vector3(x, y, z),radian);
+			ObstaclesGeneration(Vector3(x, y, z), radian);
 		}
 
 		// WAITコマンド
