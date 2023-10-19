@@ -16,8 +16,6 @@ public:
 
 	void Draw(ViewProjection& viewProojection);
 
-	void SetGameScene(GameScene* gameScene) { gameScene_ = gameScene; }
-
 	void SetCylinder(Cylinder* cylinder) { cylinder_ = cylinder; }
 
 	// 衝突を検出したら呼び出されるコールバック関数
@@ -42,7 +40,6 @@ public:
 		//どの角度に行くかのランダムな変数
 		float radian_;
 
-		GameScene* gameScene_ = nullptr;
 		//障害物の落下速度
 		Vector3 velocity_;
 		//条件式に入れる用のランダムな変数

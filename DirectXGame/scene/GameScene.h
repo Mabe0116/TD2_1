@@ -20,6 +20,7 @@
 #include <fstream>
 #include <list>
 #include <sstream>
+#include <Skydome.h>
 
 /// <summary>
 /// ゲームシーン
@@ -107,6 +108,11 @@ private: // メンバ変数
 	// 柱
 	Model* modelTree_ = nullptr;
 	Tree* tree_ = nullptr;
+
+	Sprite* sprite = nullptr;
+
+	Skydome* skydome_ = nullptr;
+	Model* modelSkydome_ = nullptr;
 
 	/// <summary>
 	/// ゲームシーン用

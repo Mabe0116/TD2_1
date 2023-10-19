@@ -43,12 +43,8 @@ void Obstacles::Update() {
 			position_ = -5.0f;
 		}
 		
-
-	
 	}
 	
-	
-
 	worldTransform_.UpdateMatrix();
 }
 
