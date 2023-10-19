@@ -113,3 +113,5 @@ void Player::Draw(const ViewProjection& viewProjection) {
 	hand_->Draw(worldTransforms_[static_cast<int>(Parts::kRightHand)], viewProjection);
 	hand_->Draw(worldTransforms_[static_cast<int>(Parts::kLeftHand)], viewProjection);
 }
+
+void Player::OnCollision() {}

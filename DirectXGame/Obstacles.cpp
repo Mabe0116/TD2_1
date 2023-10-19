@@ -42,12 +42,8 @@ void Obstacles::Update() {
 			position_ = -7.0f;
 		}
 		
-
-	
 	}
 	
-		
-
 	worldTransform_.UpdateMatrix();
 }
 
@@ -55,6 +51,10 @@ void Obstacles::Draw(ViewProjection& viewProjection) {
 	if (timer_ >= 20) {
 		model_->Draw(worldTransform_, viewProjection);
 	}
+}
+
+void Obstacles::OnCollision() {
+	isDead_ = true;
 }
 
 void Obstacles::SetParent(const WorldTransform* parent) {

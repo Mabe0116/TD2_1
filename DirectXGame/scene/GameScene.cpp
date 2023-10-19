@@ -15,11 +15,17 @@ GameScene::~GameScene() {
 	delete railCamera_;
 	delete player_;
 	delete modelTree_;
+	delete body_;
+	delete leg_;
 	delete tree_;
-	delete followCamera_;
 	delete model_;
-	delete modelobstacles_;
+	delete followCamera_;
+	delete modelSkydome_;
+	for (Obstacles* obs : obstacless_) {
+		delete obs;
+	}
 }
+
 
 void GameScene::Initialize() {
 
@@ -68,6 +74,13 @@ void GameScene::Initialize() {
 	followCamera_ = new FollowCamera;
 	// 追従カメラの初期化
 	followCamera_->Initialize();
+	// 自キャラのワールドトランスフォームを追従カメラにセット
+	followCamera_->SetTarget(&player_->GetWorldTransform());
+	//Skydome
+	modelSkydome_ = Model::CreateFromOBJ("Skydome", true);
+	skydome_ = new Skydome();
+	skydome_->Initialize(modelSkydome_);
+	skydome_->Update();
 	followCamera_->SetTarget(&tree_->GetWorldTransform());
 }
 
@@ -101,6 +114,13 @@ void GameScene::Update() {
 	for (Obstacles* obstacles : obstacless_) {
 		obstacles->Update();
 	}
+	obstacless_.remove_if([](Obstacles* obstacle) {
+		if (obstacle->IsDead()) {
+			delete obstacle;
+			return true;
+		}
+		return false;
+	});
 
 	//cylinder_->Update();
 
@@ -108,6 +128,7 @@ void GameScene::Update() {
 	viewProjection_.TransferMatrix();
 
 	UpdateEnemyPopCommands();
+	CheckAllCollisions();
 }
 
 void GameScene::Draw() {
@@ -123,6 +144,8 @@ void GameScene::Draw() {
 	/// ここに背景スプライトの描画処理を追加できる
 	/// </summary>
 
+
+
 	// スプライト描画後処理
 	Sprite::PostDraw();
 	// 深度バッファクリア
@@ -132,6 +155,8 @@ void GameScene::Draw() {
 #pragma region 3Dオブジェクト描画
 	// 3Dオブジェクト描画前処理
 	Model::PreDraw(commandList);
+
+	skydome_->Draw(viewProjection_);
 
 	/// <summary>
 	/// ここに3Dオブジェクトの描画処理を追加できる
@@ -266,3 +291,44 @@ void GameScene::UpdateEnemyPopCommands() {
 		}
 	}
 }
+
+void GameScene::CheckAllCollisions() {
+
+	//判定対象AとBの座標
+	Vector3 posA, posB;
+
+	//障害物リストの取得
+	//const std::list<Obstacles*>& GetObstacles = obstacles_->GetObstacles();
+
+	#pragma region
+	#pragma endregion
+
+	//自キャラの座標
+	posA = player_->GetWorldPosition();
+
+	//自キャラと障害物全ての当たり判定
+	for (Obstacles* obstacles : obstacless_) {
+		// obstacless_[0]
+		
+		// 障害物の座標
+		posB = obstacles->GetWorldPosition();
+
+		// 球と球の交差判定
+		float Distance = Length(Subtract(posA, posB));
+		if (Distance < 4.0f + 4.0f) {
+			// 自キャラの衝突時コールバックを呼び出す
+			player_->OnCollision();
+			// 障害物の衝突時コールバックを呼び出す
+			obstacles->OnCollision();
+		}
+	}
+
+
+}
+
+
+
+
+
+
+
