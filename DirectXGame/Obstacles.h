@@ -6,7 +6,7 @@
 // GameSceneの前方宣言(苦肉の策)
 class GameScene;
 
-class Cylinder;
+
 
 class Obstacles {
 public:
@@ -18,7 +18,7 @@ public:
 
 	void SetGameScene(GameScene* gameScene) { gameScene_ = gameScene; }
 
-	void SetCylinder(Cylinder* cylinder) { cylinder_ = cylinder; }
+	
 
 	/// 親となるワールドトランスフォームをセット
 	/// </summary>
@@ -27,13 +27,15 @@ public:
 
 	Vector3 GetWorldPosition();
 
+	
+
 	private:
 
 		WorldTransform worldTransform_;
 
 		Model* model_;
 	    
-		Cylinder* cylinder_ = nullptr;
+		
 		//どの角度に行くかのランダムな変数
 		float radian_;
 
