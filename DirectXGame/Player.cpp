@@ -9,7 +9,6 @@ Player::~Player() {
 	delete hand_;
 }
 
-void Player::Initialize() {
 
 void Player::Initialize() {
 	// シングルトンインスタンスを取得する
