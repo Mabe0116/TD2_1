@@ -6,6 +6,8 @@
 
 class Player {
 public: // メンバ関数
+	~Player();
+	
 	/// <summary>
 	/// 初期化
 	/// </summary>
@@ -25,6 +27,11 @@ public: // メンバ関数
 		 worldTransforms_[(int)Parts::kBody].parent_ = parent;
 	 }
 
+	 void SetViewProjection(const ViewProjection* viewProjection) {
+		 viewProjection_ = viewProjection;
+	 }
+
+	
 	const WorldTransform& GetWorldTransform() { return worldTransforms_[(int)Parts::kBody]; }
 	
 	// ワールド座標を取得
@@ -57,8 +64,10 @@ private:	// メンバ変数
 		kMaxParts,
 	};
 
-	//// ワールド変換データ
-	//WorldTransform worldTransform_;
+	// ワールド変換データ
+	WorldTransform worldTransform_;
+	// カメラのビュープロジェクション
+	const ViewProjection* viewProjection_ = nullptr;
 
 	Model* leg_ = nullptr;
 	Model* body_ = nullptr;

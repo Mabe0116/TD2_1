@@ -118,6 +118,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="scene\GameScene.cpp" />
     <ClCompile Include="Score.cpp" />
+    <ClCompile Include="TitleScene.cpp" />
     <ClCompile Include="Tree.cpp" />
     <ClCompile Include="WorldTransformEx.cpp" />
   </ItemGroup>
@@ -156,6 +157,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="FollowCamera.h" />
     <ClInclude Include="scene\GameScene.h" />
+    <ClInclude Include="TitleScene.h" />
     <ClInclude Include="Tree.h" />
     <ClInclude Include="Score.h" />
   </ItemGroup>

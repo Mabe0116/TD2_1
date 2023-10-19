@@ -16,7 +16,6 @@ GameScene::~GameScene() {
 	delete player_;
 	delete modelTree_;
 	delete tree_;
-	delete debugCamera_;
 	delete followCamera_;
 	delete model_;
 	delete modelobstacles_;
@@ -54,6 +53,8 @@ void GameScene::Initialize() {
 
 	player_ = new Player();
 	player_->Initialize();
+	//自キャラの生成と初期化処理
+	player_->SetViewProjection(&followCamera_->GetViewProjection());
 	// 柱の初期化
 	modelTree_ = Model::CreateFromOBJ("tree", true);
 	Vector3 position_(0, 0, 0);
@@ -67,8 +68,7 @@ void GameScene::Initialize() {
 	followCamera_ = new FollowCamera;
 	// 追従カメラの初期化
 	followCamera_->Initialize();
-	// 自キャラのワールドトランスフォームを追従カメラにセット
-	followCamera_->SetTarget(&player_->GetWorldTransform());
+	followCamera_->SetTarget(&tree_->GetWorldTransform());
 }
 
 void GameScene::Update() {
@@ -85,6 +85,7 @@ void GameScene::Update() {
 		viewProjection_.TransferMatrix();
 	} else {
 		// 追従カメラの更新
+		followCamera_->SetRotationY(tree_->GetRotationY());
 		followCamera_->Update();
 		viewProjection_.matProjection = followCamera_->GetViewProjection().matProjection;
 		viewProjection_.matView = followCamera_->GetViewProjection().matView;
