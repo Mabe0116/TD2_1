@@ -93,8 +93,9 @@ private: // メンバ変数
 	Obstacles* obstacles_ = nullptr;
 	// 障害物リスト
 	std::list<Obstacles*> obstacless_;
+	Model* modelobstacles_ = nullptr;
 
-	Cylinder* cylinder_ = nullptr;
+	
 	Model* modelcylinder_ = nullptr;
 
 	RailCamera* railCamera_ = nullptr;

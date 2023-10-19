@@ -8,8 +8,9 @@ GameScene::GameScene() {}
 
 GameScene::~GameScene() {
 	delete score_;
-	delete obstacles_;
-	delete cylinder_;
+	for (Obstacles* obstacles : obstacless_) {
+         delete obstacles;
+	}
 	delete debugCamera_;
 	delete railCamera_;
 	delete player_;
@@ -23,6 +24,9 @@ GameScene::~GameScene() {
 	for (Obstacles* obs : obstacless_) {
 		delete obs;
 	}
+}
+	delete model_;
+	delete modelobstacles_;
 }
 
 void GameScene::Initialize() {
@@ -40,13 +44,7 @@ void GameScene::Initialize() {
 
 	LoadEnemyPopData();
 
-	cylinder_ = new Cylinder();
-	modelcylinder_ = Model::CreateFromOBJ("cylinder", true);
-	const float kRotSpeed = 0.1f;
-	Vector3 velocity = {0.0f, kRotSpeed, 0.0f};
-
-	Vector3 CylinderPosition = {0.0f, 0.0f, 50.0f};
-	cylinder_->Initialize(modelcylinder_, velocity, CylinderPosition);
+	
 
 	railCamera_ = new RailCamera();
 	const float kCameraSpeed = -0.0f;
@@ -58,18 +56,21 @@ void GameScene::Initialize() {
 	viewProjection_.Initialize();
 	worldTransform_.Initialize();
 
-	// 円柱とレールカメラの親子関係を結ぶ
-	cylinder_->SetParent(&railCamera_->GetWorldTransform());
-	debugCamera_ = new DebugCamera(1280, 720);
+	
+	
 
 	player_ = new Player();
 	player_->Initialize();
+	//自キャラの生成と初期化処理
+	player_->SetViewProjection(&followCamera_->GetViewProjection());
 	// 柱の初期化
 	modelTree_ = Model::CreateFromOBJ("tree", true);
 	Vector3 position_(0, 0, 0);
 	tree_ = new Tree();
 	tree_->Initialize(modelTree_, position_);
 	player_->SetParent(&tree_->GetWorldTransform());
+
+	
 
 	// 追従カメラの生成
 	followCamera_ = new FollowCamera;
@@ -82,11 +83,12 @@ void GameScene::Initialize() {
 	skydome_ = new Skydome();
 	skydome_->Initialize(modelSkydome_);
 	skydome_->Update();
+	followCamera_->SetTarget(&tree_->GetWorldTransform());
 }
 
 void GameScene::Update() {
 #ifdef _DEBUG
-	if (input_->TriggerKey(DIK_SPACE)) {
+	if (input_->TriggerKey(DIK_S)) {
 		isDebugCameraAcctive_ = true;
 	}
 	if (isDebugCameraAcctive_) {
@@ -98,6 +100,7 @@ void GameScene::Update() {
 		viewProjection_.TransferMatrix();
 	} else {
 		// 追従カメラの更新
+		followCamera_->SetRotationY(tree_->GetRotationY());
 		followCamera_->Update();
 		viewProjection_.matProjection = followCamera_->GetViewProjection().matProjection;
 		viewProjection_.matView = followCamera_->GetViewProjection().matView;
@@ -109,7 +112,7 @@ void GameScene::Update() {
 	player_->Update();
 	tree_->Update();
 
-	//
+	
 	for (Obstacles* obstacles : obstacless_) {
 		obstacles->Update();
 	}
@@ -121,7 +124,7 @@ void GameScene::Update() {
 		return false;
 	});
 
-	cylinder_->Update();
+	//cylinder_->Update();
 
 	// ビュープロジェクション行列の転送
 	viewProjection_.TransferMatrix();
@@ -165,8 +168,8 @@ void GameScene::Draw() {
 
 	player_->Draw(viewProjection_);*/
 
-	tree_->Draw(debugCamera_->GetViewProjection());
-	player_->Draw(debugCamera_->GetViewProjection());
+	tree_->Draw(viewProjection_);
+	player_->Draw(viewProjection_);
 
 	/*leg1_->Draw(worldTransforms_[0],viewProjection_ );
 	leg2_->Draw(worldTransforms_[1],viewProjection_ );
@@ -201,11 +204,12 @@ void GameScene::Draw() {
 void GameScene::ObstaclesGeneration(const Vector3& position, int radian) {
 
 	Obstacles* obstacles = new Obstacles();
-
-	const float kObstaclesSpeed = 0.5f;
+	
+	const float kObstaclesSpeed = 1.0f;
 	Vector3 velocity = {0.0f, kObstaclesSpeed, 0.0f};
-	obstacles->Initialize(model_, ToRadian(radian), position, velocity);
-
+	modelobstacles_ = Model::CreateFromOBJ("nuts", true);
+	obstacles->Initialize(modelobstacles_, ToRadian(radian), position, velocity);
+	
 	obstacless_.push_back(obstacles);
 }
 
