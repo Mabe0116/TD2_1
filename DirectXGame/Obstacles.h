@@ -16,8 +16,6 @@ public:
 
 	void Draw(ViewProjection& viewProojection);
 
-	void SetCylinder(Cylinder* cylinder) { cylinder_ = cylinder; }
-
 	// 衝突を検出したら呼び出されるコールバック関数
 	void OnCollision();
 

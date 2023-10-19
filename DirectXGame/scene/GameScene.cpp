@@ -25,9 +25,7 @@ GameScene::~GameScene() {
 		delete obs;
 	}
 }
-	delete model_;
-	delete modelobstacles_;
-}
+
 
 void GameScene::Initialize() {
 
