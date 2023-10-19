@@ -1,5 +1,4 @@
 #include "Obstacles.h"
-#include "Cylinder.h"
 #include <cmath>
 
 void Obstacles::Initialize(Model* model, float radian,const Vector3& position,Vector3& velocity) {
@@ -14,21 +13,36 @@ void Obstacles::Initialize(Model* model, float radian,const Vector3& position,Ve
 
 	velocity_ = velocity;
 	randX=0;
+	position_ = 6.0f;
+	timer_ = 0;
+	timerspeed_ = 1;
 }
 
 void Obstacles::Update() {
 	
-
-	worldTransform_.translation_.x = 0.0f + cosf(radian_) * randX;
-	worldTransform_.translation_.z = 0.0f + sinf(radian_) * randX;
-
-	worldTransform_.translation_ = Subtract(worldTransform_.translation_, velocity_);
+	timer_ += timerspeed_;
+	worldTransform_.translation_.x = 0.0f + cosf(radian_) * position_;
+	worldTransform_.translation_.z = 0.0f + sinf(radian_) * position_;
+	if (timer_ >= 50)
+	{
+		worldTransform_.translation_ = Subtract(worldTransform_.translation_, velocity_);
+		timerspeed_ = 0;
+	}
+	
 	if (worldTransform_.translation_.y <= -50)
 	{
 		
 		worldTransform_.translation_.y = 50;
-		randX = rand() % 6-5;
+		randX = rand() % 6+1;
+		if (randX >= 1 && randX <= 3)
+		{
+			position_ = 7.0f;
+		}
+		else if (randX >= 4 && randX <= 6) {
+			position_ = -7.0f;
+		}
 		
+
 	
 	}
 	
@@ -38,8 +52,9 @@ void Obstacles::Update() {
 }
 
 void Obstacles::Draw(ViewProjection& viewProjection) {
-
-	model_->Draw(worldTransform_, viewProjection);
+	if (timer_ >= 20) {
+		model_->Draw(worldTransform_, viewProjection);
+	}
 }
 
 void Obstacles::SetParent(const WorldTransform* parent) {

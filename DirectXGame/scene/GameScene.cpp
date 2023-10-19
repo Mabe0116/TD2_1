@@ -8,8 +8,9 @@ GameScene::GameScene() {}
 
 GameScene::~GameScene() {
 	delete score_;
-	delete obstacles_;
-	delete cylinder_;
+	for (Obstacles* obstacles : obstacless_) {
+         delete obstacles;
+	}
 	delete debugCamera_;
 	delete railCamera_;
 	delete player_;
@@ -37,13 +38,7 @@ void GameScene::Initialize() {
 
 	LoadEnemyPopData();
 
-	cylinder_ = new Cylinder();
-	modelcylinder_ = Model::CreateFromOBJ("cylinder", true);
-	const float kRotSpeed = 0.1f;
-	Vector3 velocity = {0.0f, kRotSpeed, 0.0f};
-
-	Vector3 CylinderPosition = {0.0f, 0.0f, 50.0f};
-	cylinder_->Initialize(modelcylinder_, velocity, CylinderPosition);
+	
 
 	railCamera_ = new RailCamera();
 	const float kCameraSpeed = -0.0f;
@@ -55,9 +50,8 @@ void GameScene::Initialize() {
 	viewProjection_.Initialize();
 	worldTransform_.Initialize();
 
-	// 円柱とレールカメラの親子関係を結ぶ
-	cylinder_->SetParent(&railCamera_->GetWorldTransform());
-	debugCamera_ = new DebugCamera(1280, 720);
+	
+	
 
 	player_ = new Player();
 	player_->Initialize();
@@ -69,6 +63,8 @@ void GameScene::Initialize() {
 	tree_ = new Tree();
 	tree_->Initialize(modelTree_, position_);
 	player_->SetParent(&tree_->GetWorldTransform());
+
+	
 
 	// 追従カメラの生成
 	followCamera_ = new FollowCamera;
@@ -103,12 +99,12 @@ void GameScene::Update() {
 	player_->Update();
 	tree_->Update();
 
-	//
+	
 	for (Obstacles* obstacles : obstacless_) {
 		obstacles->Update();
 	}
 
-	cylinder_->Update();
+	//cylinder_->Update();
 
 	// ビュープロジェクション行列の転送
 	viewProjection_.TransferMatrix();
@@ -183,11 +179,12 @@ void GameScene::Draw() {
 void GameScene::ObstaclesGeneration(const Vector3& position, int radian) {
 
 	Obstacles* obstacles = new Obstacles();
-
-	const float kObstaclesSpeed = 0.5f;
+	
+	const float kObstaclesSpeed = 1.0f;
 	Vector3 velocity = {0.0f, kObstaclesSpeed, 0.0f};
-	obstacles->Initialize(model_, ToRadian(radian), position, velocity);
-
+	modelobstacles_ = Model::CreateFromOBJ("nuts", true);
+	obstacles->Initialize(modelobstacles_, ToRadian(radian), position, velocity);
+	
 	obstacless_.push_back(obstacles);
 }
 

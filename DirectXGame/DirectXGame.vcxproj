@@ -135,7 +135,6 @@
     <ClInclude Include="3d\Model.h" />
     <ClInclude Include="3d\PointLight.h" />
     <ClInclude Include="3d\PrimitiveDrawer.h" />
-    <ClInclude Include="3d\SpotLight.h" />
     <ClInclude Include="3d\Terrain.h" />
     <ClInclude Include="3d\TerrainCommon.h" />
     <ClInclude Include="3d\ViewProjection.h" />
