@@ -17,6 +17,10 @@ public:
 
 	const WorldTransform& GetWorldTransform() { return worldTransform_; }
 
+	float GetRotationY() {
+		return worldTransform_.rotation_.y;
+	}
+
 private:
 	// ワールド変換データ
 	WorldTransform worldTransform_;

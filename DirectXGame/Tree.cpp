@@ -22,7 +22,6 @@ void Tree::Initialize(Model* model, const Vector3& position) {
 }
 
 void Tree::Update() { 	
-	worldTransform_.UpdateMatrix();
 
 	//回転速度
 	const float RotateSpeed = 0.1f;
@@ -31,6 +30,7 @@ void Tree::Update() {
 		worldTransform_.rotation_.y += RotateSpeed;
 	}
 
+	worldTransform_.UpdateMatrix();
 
 }
 
