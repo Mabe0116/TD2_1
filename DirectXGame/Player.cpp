@@ -3,6 +3,12 @@
 
 #define LEG_ROTATE_MAX 30
 
+Player::~Player() {
+	delete body_;
+	delete leg_;
+	delete hand_;
+}
+
 void Player::Initialize() {
 
 	// 回転速度
@@ -45,13 +51,12 @@ void Player::Initialize() {
 		worldTransforms_[i].Initialize();
 	}
 
-	worldTransforms_[static_cast<int>(Parts::kBody)].rotation_ = {ToRadian(270), -ToRadian(90), 0};
-	worldTransforms_[static_cast<int>(Parts::kBody)].translation_ = {10, 0.0f, 0};
+	worldTransforms_[static_cast<int>(Parts::kBody)].rotation_ = {ToRadian(270), -ToRadian(0), 0};
+	worldTransforms_[static_cast<int>(Parts::kBody)].translation_ = {0, 0.0f, -13};
 	worldTransforms_[static_cast<int>(Parts::kLeftLeg)].translation_ = {0, -2.5f, 0};
 	worldTransforms_[static_cast<int>(Parts::kRightLeg)].translation_ = {0, -2.5f, 0};
 	worldTransforms_[static_cast<int>(Parts::kRootLeftLeg)].translation_ = {-2, 0.0f, 0};
 	worldTransforms_[static_cast<int>(Parts::kRootRightLeg)].translation_ = {2, 0.0f, 0};
-	worldTransforms_[static_cast<int>(Parts::kBody)].rotation_.y = -ToRadian(60);
 
 	worldTransforms_[static_cast<int>(Parts::kLeftLeg)].translation_ = {0.0f, -3.0f, 0.0f};
 	worldTransforms_[static_cast<int>(Parts::kRightLeg)].translation_ = {0.0f, -3.0f, 0.0f};
@@ -106,6 +111,15 @@ void Player::Update() {
 		// アフィン変換してワールド行列計算、ワールド行列を転送
 		worldTransforms_[i].UpdateMatrix();
 	}
+
+	Vector3 offset = {0.0f, 2.0f, -10.0f};
+
+	// カメラの角度から回転行列を計算する
+	worldTransform_.matWorld_ = MakeAffineMatrix(
+	    worldTransform_.scale_, worldTransform_.rotation_, worldTransform_.translation_);
+
+	//移動ベクトルをカメラの角度だけ回転する
+	offset = TransformNormal(offset, worldTransform_.matWorld_);
 }
 
 void Player::Draw(const ViewProjection& viewProjection) {
