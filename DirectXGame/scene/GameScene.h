@@ -1,25 +1,25 @@
 #pragma once
 
 #include "Audio.h"
+#include "Cylinder.h"
+#include "DebugCamera.h"
+#include "DebugCamera.h"
 #include "DirectXCommon.h"
+#include "FollowCamera.h"
 #include "Input.h"
 #include "Model.h"
+#include "Obstacles.h"
+#include "Player.h"
+#include "RailCamera.h"
 #include "SafeDelete.h"
+#include "Score.h"
 #include "Sprite.h"
 #include "ViewProjection.h"
 #include "WorldTransform.h"
-#include"Score.h"
-#include"Obstacles.h"
-
-#include"DebugCamera.h"
-#include"RailCamera.h"
+#include <Tree.h>
+#include <fstream>
 #include <list>
 #include <sstream>
-#include <fstream>
-#include "Player.h"
-#include <Tree.h>
-#include "DebugCamera.h"
-#include "FollowCamera.h"
 
 /// <summary>
 /// ゲームシーン
@@ -62,8 +62,7 @@ public: // メンバ関数
 	/// </summary>
 	void UpdateEnemyPopCommands();
 
-	void ObstaclesGeneration(const  Vector3& position,int radian);
-	
+	void ObstaclesGeneration(const Vector3& position, int radian);
 
 private: // メンバ変数
 	DirectXCommon* dxCommon_ = nullptr;
@@ -74,16 +73,16 @@ private: // メンバ変数
 	// メインカメラ
 	ViewProjection viewProjection_;
 	WorldTransform worldTransform_;
-	//テクスチャハンドル
+	// テクスチャハンドル
 	uint32_t textureHandle_ = 0;
 
 	Player* player_ = nullptr;
 	Model* body_ = nullptr;
 	Model* leg_ = nullptr;
 
-	//デバッグカメラ
+	// デバッグカメラ
 	DebugCamera* debugCamera_ = nullptr;
-	//追従カメラ, カメラの親がプレイヤー、プレイヤーの親が円柱
+	// 追従カメラ, カメラの親がプレイヤー、プレイヤーの親が円柱
 	FollowCamera* followCamera_ = nullptr;
 
 	Score* score_ = nullptr;
@@ -97,19 +96,15 @@ private: // メンバ変数
 
 	RailCamera* railCamera_ = nullptr;
 
-	 // 敵発生コマンド
+	// 敵発生コマンド
 	std::stringstream enemyPopCommands;
 
-	//デバッグカメラ有効
+	// デバッグカメラ有効
 	bool isDebugCameraAcctive_ = false;
-	
 
-	//柱
+	// 柱
 	Model* modelTree_ = nullptr;
 	Tree* tree_ = nullptr;
-
-
-		
 
 	/// <summary>
 	/// ゲームシーン用
