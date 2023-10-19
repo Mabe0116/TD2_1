@@ -1,25 +1,22 @@
-#include "TitleScene.h"
+#include "GameOver.h"
 
-TitleScene::TitleScene() {}
+GameOver::GameOver() {}
 
-TitleScene::~TitleScene(){
+GameOver::~GameOver(){
 
 };
 
-void TitleScene::Initialize() {
+void GameOver::Initialize() {
 	dxCommon_ = DirectXCommon::GetInstance();
 	input_ = Input::GetInstance();
 	audio_ = Audio::GetInstance();
 
 	
-
 }
 
-void TitleScene::Update() {
-	
-}
+void GameOver::Update() {}
 
-void TitleScene::Draw() {
+void GameOver::Draw() {
 	// コマンドリストの取得
 	ID3D12GraphicsCommandList* commandList = dxCommon_->GetCommandList();
 

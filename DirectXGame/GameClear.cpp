@@ -1,25 +1,22 @@
-#include "TitleScene.h"
+#include "GameClear.h"
 
-TitleScene::TitleScene() {}
+GameClear::GameClear() {}
 
-TitleScene::~TitleScene(){
+GameClear::~GameClear(){};
 
-};
-
-void TitleScene::Initialize() {
+void GameClear::Initialize() {
 	dxCommon_ = DirectXCommon::GetInstance();
 	input_ = Input::GetInstance();
 	audio_ = Audio::GetInstance();
 
 	
-
 }
 
-void TitleScene::Update() {
+void GameClear::Update() {
 	
 }
 
-void TitleScene::Draw() {
+void GameClear::Draw() {
 	// コマンドリストの取得
 	ID3D12GraphicsCommandList* commandList = dxCommon_->GetCommandList();
 
@@ -58,7 +55,6 @@ void TitleScene::Draw() {
 	/// </summary>
 
 	
-
 	// スプライト描画後処理
 	Sprite::PostDraw();
 

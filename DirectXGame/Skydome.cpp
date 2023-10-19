@@ -5,9 +5,10 @@ void Skydome::Initialize(Model* model) {
 	assert(model);
 	model_ = model;
 	worldTransform_.Initialize();
-	worldTransform_.scale_.x = 20;
-	worldTransform_.scale_.y = 20;
-	worldTransform_.scale_.z = 20;
+	worldTransform_.translation_ = {0.0f, 0.0f, 0.0f};
+	worldTransform_.scale_.x = 30;
+	worldTransform_.scale_.y = 30;
+	worldTransform_.scale_.z = 30;
 }
 
 void Skydome::Update() { worldTransform_.UpdateMatrix(); }

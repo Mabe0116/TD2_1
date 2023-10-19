@@ -111,6 +111,9 @@
     <ClCompile Include="base\WinApp.cpp" />
     <ClCompile Include="FollowCamera.cpp" />
     <ClCompile Include="Cylinder.cpp" />
+    <ClCompile Include="GameClear.cpp" />
+    <ClCompile Include="GameExplanation.cpp" />
+    <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MyMath.cpp" />
     <ClCompile Include="Obstacles.cpp" />
@@ -147,6 +150,9 @@
     <ClInclude Include="base\TextureManager.h" />
     <ClInclude Include="base\WinApp.h" />
     <ClInclude Include="Cylinder.h" />
+    <ClInclude Include="GameClear.h" />
+    <ClInclude Include="GameExplanation.h" />
+    <ClInclude Include="GameOver.h" />
     <ClInclude Include="input\Input.h" />
     <ClInclude Include="math\Matrix4x4.h" />
     <ClInclude Include="math\Vector2.h" />
@@ -157,6 +163,7 @@
     <ClInclude Include="RailCamera.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="FollowCamera.h" />
+    <ClInclude Include="Scene.h" />
     <ClInclude Include="scene\GameScene.h" />
     <ClInclude Include="Skydome.h" />
     <ClInclude Include="TitleScene.h" />

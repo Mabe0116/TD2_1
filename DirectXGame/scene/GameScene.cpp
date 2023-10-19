@@ -156,7 +156,7 @@ void GameScene::Draw() {
 	// 3Dオブジェクト描画前処理
 	Model::PreDraw(commandList);
 
-	skydome_->Draw(viewProjection_);
+	
 
 	/// <summary>
 	/// ここに3Dオブジェクトの描画処理を追加できる
@@ -178,6 +178,8 @@ void GameScene::Draw() {
 	for (Obstacles* obstacles : obstacless_) {
 		obstacles->Draw(viewProjection_);
 	}
+
+	skydome_->Draw(viewProjection_);
 
 	//cylinder_->Draw(viewProjection_);
 

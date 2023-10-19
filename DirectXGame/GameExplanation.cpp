@@ -1,25 +1,25 @@
-#include "TitleScene.h"
+#include "GameExplanation.h"
 
-TitleScene::TitleScene() {}
+GameExplanation::GameExplanation() {}
 
-TitleScene::~TitleScene(){
+GameExplanation::~GameExplanation(){
 
 };
 
-void TitleScene::Initialize() {
+void GameExplanation::Initialize() {
 	dxCommon_ = DirectXCommon::GetInstance();
 	input_ = Input::GetInstance();
 	audio_ = Audio::GetInstance();
 
 	
-
 }
 
-void TitleScene::Update() {
+void GameExplanation::Update() {
+
 	
 }
 
-void TitleScene::Draw() {
+void GameExplanation::Draw() {
 	// コマンドリストの取得
 	ID3D12GraphicsCommandList* commandList = dxCommon_->GetCommandList();
 
