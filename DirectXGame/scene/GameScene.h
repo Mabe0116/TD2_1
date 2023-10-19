@@ -10,7 +10,7 @@
 #include "WorldTransform.h"
 #include"Score.h"
 #include"Obstacles.h"
-#include"Cylinder.h"
+
 #include"DebugCamera.h"
 #include"RailCamera.h"
 #include <list>
@@ -88,10 +88,11 @@ private: // メンバ変数
 
 	Score* score_ = nullptr;
 
-	Obstacles* obstacles_ = nullptr;
+	//stacles* obstacles_ = nullptr;
 	std::list<Obstacles*> obstacless_;
+	Model* modelobstacles_ = nullptr;
 
-	Cylinder* cylinder_ = nullptr;
+	
 	Model* modelcylinder_ = nullptr;
 
 	RailCamera* railCamera_ = nullptr;
