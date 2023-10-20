@@ -9,6 +9,9 @@ GameScene::GameScene() {}
 
 GameScene::~GameScene() {
 	delete score_;
+	for (Obstacles* obstacles : obstacless_) {
+         delete obstacles;
+	}
 	delete debugCamera_;
 	delete railCamera_;
 	delete player_;
@@ -131,7 +134,13 @@ void GameScene::Update() {
 	for (Obstacles* obstacles : obstacless_) {
 		obstacles->Update();
 	}
-	
+	obstacless_.remove_if([](Obstacles* obstacle) {
+		if (obstacle->IsDead()) {
+			delete obstacle;
+			return true;
+		}
+		return false;
+	});
 
 	//cylinder_->Update();
 
