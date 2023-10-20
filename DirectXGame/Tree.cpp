@@ -28,6 +28,12 @@ void Tree::Update() {
 
 	if (input_->PushKey(DIK_SPACE)) {
 		worldTransform_.rotation_.y += RotateSpeed;
+		Timer++;
+	}
+
+	if (Timer > 60) {
+		Meter++;
+		Timer = 0;
 	}
 
 	worldTransform_.UpdateMatrix();

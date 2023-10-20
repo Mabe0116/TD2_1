@@ -212,7 +212,7 @@ void GameScene::Draw() {
 
 
 	//スコアの変動
-	int32_t Meter = MeterCount;
+	int32_t Meter = tree_->GetMeter();
 
 	// 1000の位
 	eachNumber[0] = Meter / 1000;

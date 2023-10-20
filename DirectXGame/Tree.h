@@ -21,6 +21,10 @@ public:
 		return worldTransform_.rotation_.y;
 	}
 
+	uint32_t GetMeter() { 
+		return Meter;
+	}
+
 private:
 	// ワールド変換データ
 	WorldTransform worldTransform_;
@@ -30,4 +34,7 @@ private:
 	uint32_t textureHandle_ = 0u;
 	// キーボード入力
 	Input* input_ = nullptr;
+	//タイマー
+	int Timer = 0;
+	uint32_t Meter = 0;
 };
