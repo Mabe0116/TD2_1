@@ -67,6 +67,8 @@ public: // メンバ関数
 
 	void CheckAllCollisions();
 
+	void AddMeterCount() { MeterCount += 1; };
+
 private: // メンバ変数
 	DirectXCommon* dxCommon_ = nullptr;
 	Input* input_ = nullptr;
@@ -110,10 +112,31 @@ private: // メンバ変数
 	Model* modelTree_ = nullptr;
 	Tree* tree_ = nullptr;
 
-	Sprite* sprite = nullptr;
 
 	Skydome* skydome_ = nullptr;
 	Model* modelSkydome_ = nullptr;
+
+	
+
+	//スコア変動
+	int32_t eachNumber[4]{};
+
+	int32_t MeterCount = 0;
+
+	//UI
+	uint32_t TextureHandle_[12]{};
+
+	//スコアの描画
+	Sprite* sprite0 = nullptr;
+	Sprite* sprite1 = nullptr;
+	Sprite* sprite2 = nullptr;
+	Sprite* sprite3 = nullptr;
+	Sprite* sprite4 = nullptr;
+
+	//ライフの描画
+	Sprite* sprite5 = nullptr;
+	Sprite* sprite6 = nullptr;
+	Sprite* sprite7 = nullptr;
 
 	/// <summary>
 	/// ゲームシーン用

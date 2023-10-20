@@ -62,6 +62,9 @@ void Player::Initialize() {
 	worldTransforms_[static_cast<int>(Parts::kRootRightHand)].rotation_ = {
 	    0.0f, 0.0f, ToRadian(-20)};
 	worldTransforms_[static_cast<int>(Parts::kRootLeftHand)].rotation_ = {0.0f, 0.0f, ToRadian(20)};
+
+	//ライフ
+	Life_ = 3;
 }
 
 void Player::Update() {
@@ -114,4 +117,6 @@ void Player::Draw(const ViewProjection& viewProjection) {
 	hand_->Draw(worldTransforms_[static_cast<int>(Parts::kLeftHand)], viewProjection);
 }
 
-void Player::OnCollision() {}
+void Player::OnCollision() {
+	Life_--;
+}
