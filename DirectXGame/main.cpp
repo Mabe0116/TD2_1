@@ -10,6 +10,7 @@
 #include"GameOver.h"
 #include"GameClear.h"
 #include"GameExplanation.h"
+#include "Result.h"
 
 // Windowsアプリでのエントリーポイント(main関数)
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
@@ -52,6 +53,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	// 3Dモデル静的初期化
 	Model::StaticInitialize();
+
+	Result* result = new Result();
+	result->Initialize();
 
 	// 軸方向表示初期化
 	axisIndicator = AxisIndicator::GetInstance();
@@ -177,11 +181,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		// 描画終了
 		dxCommon->PostDraw();
 	}
-		// 各種解放
-		SafeDelete(gameScene);
-		audio->Finalize();
-		// ImGui解放
-		imguiManager->Finalize();
+
+	// 各種解放
+	SafeDelete(gameScene);
+	SafeDelete(result);
+	audio->Finalize();
+	// ImGui解放
+	imguiManager->Finalize();
 
 		// ゲームウィンドウの破棄
 		win->TerminateGameWindow();
