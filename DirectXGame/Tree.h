@@ -21,9 +21,11 @@ public:
 		return worldTransform_.rotation_.y;
 	}
 
-	uint32_t GetMeter() { 
+	static uint32_t GetMeter() { 
 		return Meter;
 	}
+
+	static void SetMeter(uint32_t NewMeter) { Meter = NewMeter; }
 
 private:
 	// ワールド変換データ
@@ -36,5 +38,5 @@ private:
 	Input* input_ = nullptr;
 	//タイマー
 	int Timer = 0;
-	uint32_t Meter = 0;
+	static uint32_t Meter;
 };

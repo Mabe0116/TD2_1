@@ -5,6 +5,8 @@ Tree::~Tree() {
 	
 }
 
+uint32_t Tree::Meter = 0;
+
 void Tree::Initialize(Model* model, const Vector3& position) {
 
 	//NULLポインタチェック

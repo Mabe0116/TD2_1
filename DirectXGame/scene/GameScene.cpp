@@ -37,6 +37,7 @@ void GameScene::Initialize() {
 	score_ = new Score();
 	score_->Initialize();
 
+
 	LoadEnemyPopData();
 
 	railCamera_ = new RailCamera();
@@ -61,18 +62,18 @@ void GameScene::Initialize() {
 	tree_->Initialize(modelTree_, position_);
 	player_->SetParent(&tree_->GetWorldTransform());
 	//スコア
-	TextureHandle_[0] = TextureManager::Load("UI/0.png");
-	TextureHandle_[1] = TextureManager::Load("UI/1.png");
-	TextureHandle_[2] = TextureManager::Load("UI/2.png");
-	TextureHandle_[3] = TextureManager::Load("UI/3.png");
-	TextureHandle_[4] = TextureManager::Load("UI/4.png");
-	TextureHandle_[5] = TextureManager::Load("UI/5.png");
-	TextureHandle_[6] = TextureManager::Load("UI/6.png");
-	TextureHandle_[7] = TextureManager::Load("UI/7.png");
-	TextureHandle_[8] = TextureManager::Load("UI/8.png");
-	TextureHandle_[9] = TextureManager::Load("UI/9.png");
+	TextureHandle_[0] = TextureManager::Load("UI/score/0.png");
+	TextureHandle_[1] = TextureManager::Load("UI/score/1.png");
+	TextureHandle_[2] = TextureManager::Load("UI/score/2.png");
+	TextureHandle_[3] = TextureManager::Load("UI/score/3.png");
+	TextureHandle_[4] = TextureManager::Load("UI/score/4.png");
+	TextureHandle_[5] = TextureManager::Load("UI/score/5.png");
+	TextureHandle_[6] = TextureManager::Load("UI/score/6.png");
+	TextureHandle_[7] = TextureManager::Load("UI/score/7.png");
+	TextureHandle_[8] = TextureManager::Load("UI/score/8.png");
+	TextureHandle_[9] = TextureManager::Load("UI/score/9.png");
 	//メートル
-	TextureHandle_[10] = TextureManager::Load("UI/meter.png");
+	TextureHandle_[10] = TextureManager::Load("UI/score/meter.png");
 	//HP
 	TextureHandle_[11] = TextureManager::Load("UI/HP.png");
 
