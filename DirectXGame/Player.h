@@ -52,6 +52,8 @@ public: // メンバ関数
 		return worldPos;
 	};
 
+	 bool IsDead() const { return isDead_; }
+
 private:	// メンバ変数
   // キーボード入力
 	Input* input_ = nullptr;
@@ -90,4 +92,6 @@ private:	// メンバ変数
 
 	//ライフ
 	int32_t Life_ = 0;
+
+	bool isDead_ = false;
 };

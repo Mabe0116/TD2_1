@@ -7,6 +7,7 @@ void Obstacles::Initialize(Model* model, float radian,const Vector3& position,Ve
 	worldTransform_.Initialize();
 
 	worldTransform_.translation_ = position;
+
 	worldTransform_.scale_ = {1.0f, 1.0f, 1.0f};
 
 	radian_ = radian;
@@ -53,9 +54,7 @@ void Obstacles::Draw(ViewProjection& viewProjection) {
 	}
 }
 
-void Obstacles::OnCollision() {
-	isDead_ = true;
-}
+void Obstacles::OnCollision() { worldTransform_.translation_.y = 50; }
 
 void Obstacles::SetParent(const WorldTransform* parent) {
 	// 親子関係を結ぶ
@@ -72,3 +71,4 @@ Vector3 Obstacles::GetWorldPosition()
 
     return worldPos;
 }
+

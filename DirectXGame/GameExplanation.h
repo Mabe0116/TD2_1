@@ -35,7 +35,8 @@ public: // メンバ関数
 	/// </summary>
 	void Draw();
 
-
+	bool IsSceneEnd() { return isSceneEnd_; }
+	Scene::SceneType NextScene() { return Scene::SceneType::kGamePlay; }
 
 	
 
@@ -44,7 +45,7 @@ private: // メンバ変数
 	Input* input_ = nullptr;
 	Audio* audio_ = nullptr;
 	
-
+	bool isSceneEnd_ = false;
 	
 
 };

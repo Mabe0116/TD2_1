@@ -19,6 +19,8 @@ public:
 	// 衝突を検出したら呼び出されるコールバック関数
 	void OnCollision();
 
+	void Position();
+
 	bool IsDead() const { return isDead_; }
 
 	/// 親となるワールドトランスフォームをセット

@@ -15,7 +15,9 @@ void GameExplanation::Initialize() {
 }
 
 void GameExplanation::Update() {
-
+	if (input_->TriggerKey(DIK_SPACE)) {
+		isSceneEnd_ = true;
+	}
 	
 }
 

@@ -132,13 +132,7 @@ void GameScene::Update() {
 	for (Obstacles* obstacles : obstacless_) {
 		obstacles->Update();
 	}
-	obstacless_.remove_if([](Obstacles* obstacle) {
-		if (obstacle->IsDead()) {
-			delete obstacle;
-			return true;
-		}
-		return false;
-	});
+	
 
 	//cylinder_->Update();
 
@@ -148,7 +142,9 @@ void GameScene::Update() {
 	UpdateEnemyPopCommands();
 	CheckAllCollisions();
 
-
+	if (player_->IsDead()) {
+		isSceneEnd_ = true;
+	}
 
 }
 
@@ -427,7 +423,7 @@ void GameScene::UpdateEnemyPopCommands() {
 			getline(line_stream, word, ',');
 			float z = (float)std::atof(word.c_str());
 
-			int radian = rand() % 361;
+			int radian = rand() % 360;
 
 			// 敵を発生させる
 			ObstaclesGeneration(Vector3(x, y, z), radian);

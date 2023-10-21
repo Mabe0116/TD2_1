@@ -119,4 +119,7 @@ void Player::Draw(const ViewProjection& viewProjection) {
 
 void Player::OnCollision() {
 	Life_--;
+	if (Life_ <= 0) {
+		isDead_ = true;
+	}
 }

@@ -21,6 +21,7 @@
 #include <list>
 #include <sstream>
 #include <Skydome.h>
+#include"Scene.h"
 
 /// <summary>
 /// ゲームシーン
@@ -68,6 +69,11 @@ public: // メンバ関数
 	void CheckAllCollisions();
 
 	void AddMeterCount() { MeterCount += 1; };
+
+	bool IsSceneEnd() { return isSceneEnd_; }
+	Scene::SceneType NextScene() { return Scene::SceneType::kGameOver; }
+
+
 
 private: // メンバ変数
 	DirectXCommon* dxCommon_ = nullptr;
@@ -137,6 +143,10 @@ private: // メンバ変数
 	Sprite* sprite5 = nullptr;
 	Sprite* sprite6 = nullptr;
 	Sprite* sprite7 = nullptr;
+
+	bool isSceneEnd_ = false;
+
+	
 
 	/// <summary>
 	/// ゲームシーン用

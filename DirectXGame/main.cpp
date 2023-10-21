@@ -97,20 +97,30 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		case Scene::SceneType::kTitle:
 
 			titleScene->Update();
-
+			if (titleScene->IsSceneEnd()) {
+				// 次のシーンの値を代入してシーンを切り替え
+				sceneNo = titleScene->NextScene();
+			}
 		
 
 			break;
 		case Scene::SceneType::kGameExplanation:
 			gameexplanation->Update();
-
+			if (gameexplanation->IsSceneEnd()) {
+				sceneNo = gameexplanation->NextScene();
+			}
 			
 			break;
 		case Scene::SceneType::kGamePlay:
 			// ゲームシーンの毎フレーム処理
 			gameScene->Update();
 
-			
+			if (gameScene->IsSceneEnd()) {
+				sceneNo = gameScene->NextScene();
+
+			}
+
+		
 
 			
 

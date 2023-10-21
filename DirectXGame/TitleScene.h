@@ -32,7 +32,8 @@ class TitleScene {
 	    /// </summary>
 	    void Draw();
 
-	    
+	    bool IsSceneEnd() { return isSceneEnd_; }
+	    Scene::SceneType NextScene() { return Scene::SceneType::kGameExplanation; }
 
 	   
 
@@ -41,7 +42,7 @@ class TitleScene {
 	    Input* input_ = nullptr;
 	    Audio* audio_ = nullptr;
 	  
-
+		bool isSceneEnd_ = false;
 	   
 
 };
