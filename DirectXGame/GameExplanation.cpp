@@ -11,7 +11,9 @@ void GameExplanation::Initialize() {
 	input_ = Input::GetInstance();
 	audio_ = Audio::GetInstance();
 
-	
+	// 画像
+	textureHandle_ = TextureManager::Load("mrst.png");
+	sprite_ = Sprite::Create(textureHandle_, {0, 0});
 }
 
 void GameExplanation::Update() {
@@ -32,7 +34,8 @@ void GameExplanation::Draw() {
 	/// <summary>
 	/// ここに背景スプライトの描画処理を追加できる
 	/// </summary>
-
+	// 画像
+	sprite_->Draw();
 	// スプライト描画後処理
 	Sprite::PostDraw();
 	// 深度バッファクリア

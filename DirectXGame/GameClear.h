@@ -42,4 +42,7 @@ private: // メンバ変数
 	Input* input_ = nullptr;
 	Audio* audio_ = nullptr;
 	
+	// 画像
+	uint32_t textureHandle_ = 0;
+	Sprite* sprite_ = nullptr;
 };
