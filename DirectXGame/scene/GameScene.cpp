@@ -100,6 +100,9 @@ void GameScene::Initialize() {
 	skydome_->Initialize(modelSkydome_);
 	skydome_->Update();
 	followCamera_->SetTarget(&tree_->GetWorldTransform());
+
+	soundDataHandle_ = audio_->LoadWave("BGM.wav");
+	audio_->PlayWave(soundDataHandle_,true);
 }
 
 void GameScene::Update() {
@@ -128,6 +131,9 @@ void GameScene::Update() {
 	player_->Update();
 	tree_->Update();
 
+	if (input_->TriggerKey(DIK_S)) {
+		audio_->StopWave(soundDataHandle_);
+	}
 	
 	for (Obstacles* obstacles : obstacless_) {
 		obstacles->Update();

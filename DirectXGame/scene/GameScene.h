@@ -71,7 +71,7 @@ public: // メンバ関数
 	void AddMeterCount() { MeterCount += 1; };
 
 	bool IsSceneEnd() { return isSceneEnd_; }
-	Scene::SceneType NextScene() { return Scene::SceneType::kGameOver; }
+	Scene::SceneType NextScene() { return Scene::SceneType::kGameClear; }
 
 
 
@@ -146,6 +146,7 @@ private: // メンバ変数
 
 	bool isSceneEnd_ = false;
 
+	uint32_t soundDataHandle_ = 0;
 	
 
 	/// <summary>
