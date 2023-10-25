@@ -57,7 +57,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	primitiveDrawer->Initialize();
 #pragma endregion
 
-	// ゲームシーンの初期化
 	gameScene = new GameScene();
 	gameScene->Initialize();
 
@@ -67,17 +66,16 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		if (win->ProcessMessage()) {
 			break;
 		}
-
 		// ImGui受付開始
 		imguiManager->Begin();
 		// 入力関連の毎フレーム処理
 		input->Update();
-		// ゲームシーンの毎フレーム処理
-		gameScene->Update();
+
 		// 軸表示の更新
 		axisIndicator->Update();
 		// ImGui受付終了
 		imguiManager->End();
+		gameScene->Update();
 
 		// 描画開始
 		dxCommon->PreDraw();
@@ -92,15 +90,14 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		// 描画終了
 		dxCommon->PostDraw();
 	}
+		// 各種解放
+		SafeDelete(gameScene);
+		audio->Finalize();
+		// ImGui解放
+		imguiManager->Finalize();
 
-	// 各種解放
-	SafeDelete(gameScene);
-	audio->Finalize();
-	// ImGui解放
-	imguiManager->Finalize();
+		// ゲームウィンドウの破棄
+		win->TerminateGameWindow();
 
-	// ゲームウィンドウの破棄
-	win->TerminateGameWindow();
-
-	return 0;
-}
+		return 0;
+	}

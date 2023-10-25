@@ -4,13 +4,11 @@
 #include "TextureManager.h"
 #include <cassert>
 
+
 GameScene::GameScene() {}
 
 GameScene::~GameScene() {
 	delete score_;
-	for (Obstacles* obstacles : obstacless_) {
-         delete obstacles;
-	}
 	delete debugCamera_;
 	delete railCamera_;
 	delete player_;
@@ -18,10 +16,8 @@ GameScene::~GameScene() {
 	delete tree_;
 	delete followCamera_;
 	delete model_;
-	for (Obstacles* obs : obstacless_) {
-		delete obs;
+	delete modelobstacles_;
 	}
-}
 
 void GameScene::Initialize() {
 
@@ -33,6 +29,7 @@ void GameScene::Initialize() {
 	audio_ = Audio::GetInstance();
 	model_ = Model::Create();
 
+	
 	score_ = new Score();
 	score_->Initialize();
 
