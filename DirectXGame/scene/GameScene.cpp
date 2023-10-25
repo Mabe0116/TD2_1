@@ -35,6 +35,7 @@ void GameScene::Initialize() {
 	audio_ = Audio::GetInstance();
 	model_ = Model::Create();
 
+
 	
 	score_ = new Score();
 	score_->Initialize();
@@ -104,6 +105,11 @@ void GameScene::Initialize() {
 	skydome_->Update();
 	followCamera_->SetTarget(&tree_->GetWorldTransform());
 
+	soundDataHandle_ = audio_->LoadWave("BGM//BGM2.mp3");
+	audio_->PlayWave(soundDataHandle_, true);
+
+	soundDataHandle2_ = audio_->LoadWave("SE//SE.wav");
+
 	
 }
 
@@ -135,6 +141,9 @@ void GameScene::Update() {
 	player_->Update();
 	tree_->Update();
 	
+	if (input_->TriggerKey(DIK_S)) {
+		audio_->StopWave(soundDataHandle_);
+	}
 	
 	
 	for (Obstacles* obstacles : obstacless_) {
@@ -149,7 +158,7 @@ void GameScene::Update() {
 	});
 
 	//cylinder_->Update();
-
+	
 	// ビュープロジェクション行列の転送
 	viewProjection_.TransferMatrix();
 
@@ -221,8 +230,7 @@ void GameScene::Draw() {
 #pragma region 前景スプライト描画
 	// 前景スプライト描画前処理
 	Sprite::PreDraw(commandList);
-
-
+	
 	//スコアの変動
 	int32_t Meter = tree_->GetMeter();
 
@@ -240,105 +248,105 @@ void GameScene::Draw() {
 
 	//1の位
 	eachNumber[3] = Meter;
-
-	// 1000の位
-	sprite0->SetTextureHandle(TextureHandle_[eachNumber[0]]);
-	/*if (eachNumber[0] == 0) {
-		sprite0->SetTextureHandle(TextureHandle_[0]);
-	} else if (eachNumber[0] == 1) {
-		sprite0->SetTextureHandle(TextureHandle_[1]);
-	} else if (eachNumber[0] == 2) {
-		sprite0->SetTextureHandle(TextureHandle_[2]);
-	} else if (eachNumber[0] == 3) {
-		sprite0->SetTextureHandle(TextureHandle_[3]);
-	} else if (eachNumber[0] == 4) {
-		sprite0->SetTextureHandle(TextureHandle_[4]);
-	} else if (eachNumber[0] == 5) {
-		sprite0->SetTextureHandle(TextureHandle_[5]);
-	} else if (eachNumber[0] == 6) {
-		sprite0->SetTextureHandle(TextureHandle_[6]);
-	} else if (eachNumber[0] == 7) {
-		sprite0->SetTextureHandle(TextureHandle_[7]);
-	} else if (eachNumber[0] == 8) {
-		sprite0->SetTextureHandle(TextureHandle_[8]);
-	} else if (eachNumber[0] == 9) {
-		sprite0->SetTextureHandle(TextureHandle_[9]);
-	}*/
-
-	// 100の位
-	sprite1->SetTextureHandle(TextureHandle_[eachNumber[1]]);
-	/*if (eachNumber[1] == 0) {
-		sprite1->SetTextureHandle(TextureHandle_[0]);
-	} else if (eachNumber[1] == 1) {
-		sprite1->SetTextureHandle(TextureHandle_[1]);
-	} else if (eachNumber[1] == 2) {
-		sprite1->SetTextureHandle(TextureHandle_[2]);
-	} else if (eachNumber[1] == 3) {
-		sprite1->SetTextureHandle(TextureHandle_[3]);
-	} else if (eachNumber[1] == 4) {
-		sprite1->SetTextureHandle(TextureHandle_[4]);
-	} else if (eachNumber[1] == 5) {
-		sprite1->SetTextureHandle(TextureHandle_[5]);
-	} else if (eachNumber[1] == 6) {
-		sprite1->SetTextureHandle(TextureHandle_[6]);
-	} else if (eachNumber[1] == 7) {
-		sprite1->SetTextureHandle(TextureHandle_[7]);
-	} else if (eachNumber[1] == 8) {
-		sprite1->SetTextureHandle(TextureHandle_[8]);
-	} else if (eachNumber[1] == 9) {
-		sprite1->SetTextureHandle(TextureHandle_[9]);
-	}*/
-
-	//10の位
-	sprite2->SetTextureHandle(TextureHandle_[eachNumber[2]]);
-	/*if (eachNumber[2] == 0) {
-		sprite2->SetTextureHandle(TextureHandle_[0]);
-	} else if (eachNumber[2] == 1) {
-		sprite2->SetTextureHandle(TextureHandle_[1]);
-	} else if (eachNumber[2] == 2) {
-		sprite2->SetTextureHandle(TextureHandle_[2]);
-	} else if (eachNumber[2] == 3) {
-		sprite2->SetTextureHandle(TextureHandle_[3]);
-	} else if (eachNumber[2] == 4) {
-		sprite2->SetTextureHandle(TextureHandle_[4]);
-	} else if (eachNumber[2] == 5) {
-		sprite2->SetTextureHandle(TextureHandle_[5]);
-	} else if (eachNumber[2] == 6) {
-		sprite2->SetTextureHandle(TextureHandle_[6]);
-	} else if (eachNumber[2] == 7) {
-		sprite2->SetTextureHandle(TextureHandle_[7]);
-	} else if (eachNumber[2] == 8) {
-		sprite2->SetTextureHandle(TextureHandle_[8]);
-	} else if (eachNumber[2] == 9) {
-		sprite2->SetTextureHandle(TextureHandle_[9]);
-	}*/
-
 	
-		//1の位
-	sprite3->SetTextureHandle(TextureHandle_[eachNumber[3]]);
 
-	/*if (eachNumber[3] == 0) {
-		sprite3->SetTextureHandle(TextureHandle_[0]);
-	} else if (eachNumber[3] == 1) {
-		sprite3->SetTextureHandle(TextureHandle_[1]);
-	} else if (eachNumber[3] == 2) {
-		sprite3->SetTextureHandle(TextureHandle_[2]);
-	} else if (eachNumber[3] == 3) {
-		sprite3->SetTextureHandle(TextureHandle_[3]);
-	} else if (eachNumber[3] == 4) {
-		sprite3->SetTextureHandle(TextureHandle_[4]);
-	} else if (eachNumber[3] == 5) {
-		sprite3->SetTextureHandle(TextureHandle_[5]);
-	} else if (eachNumber[3] == 6) {
-		sprite3->SetTextureHandle(TextureHandle_[6]);
-	} else if (eachNumber[3] == 7) {
-		sprite3->SetTextureHandle(TextureHandle_[7]);
-	} else if (eachNumber[3] == 8) {
-		sprite3->SetTextureHandle(TextureHandle_[8]);
-	} else if (eachNumber[3] == 9) {
-		sprite3->SetTextureHandle(TextureHandle_[9]);
-	}*/
+		// 1000の位
+		sprite0->SetTextureHandle(TextureHandle_[eachNumber[0]]);
+		if (eachNumber[0] == 0) {
+			sprite0->SetTextureHandle(TextureHandle_[0]);
+		} else if (eachNumber[0] == 1) {
+			sprite0->SetTextureHandle(TextureHandle_[1]);
+		} else if (eachNumber[0] == 2) {
+			sprite0->SetTextureHandle(TextureHandle_[2]);
+		} else if (eachNumber[0] == 3) {
+			sprite0->SetTextureHandle(TextureHandle_[3]);
+		} else if (eachNumber[0] == 4) {
+			sprite0->SetTextureHandle(TextureHandle_[4]);
+		} else if (eachNumber[0] == 5) {
+			sprite0->SetTextureHandle(TextureHandle_[5]);
+		} else if (eachNumber[0] == 6) {
+			sprite0->SetTextureHandle(TextureHandle_[6]);
+		} else if (eachNumber[0] == 7) {
+			sprite0->SetTextureHandle(TextureHandle_[7]);
+		} else if (eachNumber[0] == 8) {
+			sprite0->SetTextureHandle(TextureHandle_[8]);
+		} else if (eachNumber[0] == 9) {
+			sprite0->SetTextureHandle(TextureHandle_[9]);
+		}
 
+		// 100の位
+		sprite1->SetTextureHandle(TextureHandle_[eachNumber[1]]);
+		if (eachNumber[1] == 0) {
+			sprite1->SetTextureHandle(TextureHandle_[0]);
+		} else if (eachNumber[1] == 1) {
+			sprite1->SetTextureHandle(TextureHandle_[1]);
+		} else if (eachNumber[1] == 2) {
+			sprite1->SetTextureHandle(TextureHandle_[2]);
+		} else if (eachNumber[1] == 3) {
+			sprite1->SetTextureHandle(TextureHandle_[3]);
+		} else if (eachNumber[1] == 4) {
+			sprite1->SetTextureHandle(TextureHandle_[4]);
+		} else if (eachNumber[1] == 5) {
+			sprite1->SetTextureHandle(TextureHandle_[5]);
+		} else if (eachNumber[1] == 6) {
+			sprite1->SetTextureHandle(TextureHandle_[6]);
+		} else if (eachNumber[1] == 7) {
+			sprite1->SetTextureHandle(TextureHandle_[7]);
+		} else if (eachNumber[1] == 8) {
+			sprite1->SetTextureHandle(TextureHandle_[8]);
+		} else if (eachNumber[1] == 9) {
+			sprite1->SetTextureHandle(TextureHandle_[9]);
+		}
+
+		// 10の位
+		sprite2->SetTextureHandle(TextureHandle_[eachNumber[2]]);
+		if (eachNumber[2] == 0) {
+			sprite2->SetTextureHandle(TextureHandle_[0]);
+		} else if (eachNumber[2] == 1) {
+			sprite2->SetTextureHandle(TextureHandle_[1]);
+		} else if (eachNumber[2] == 2) {
+			sprite2->SetTextureHandle(TextureHandle_[2]);
+		} else if (eachNumber[2] == 3) {
+			sprite2->SetTextureHandle(TextureHandle_[3]);
+		} else if (eachNumber[2] == 4) {
+			sprite2->SetTextureHandle(TextureHandle_[4]);
+		} else if (eachNumber[2] == 5) {
+			sprite2->SetTextureHandle(TextureHandle_[5]);
+		} else if (eachNumber[2] == 6) {
+			sprite2->SetTextureHandle(TextureHandle_[6]);
+		} else if (eachNumber[2] == 7) {
+			sprite2->SetTextureHandle(TextureHandle_[7]);
+		} else if (eachNumber[2] == 8) {
+			sprite2->SetTextureHandle(TextureHandle_[8]);
+		} else if (eachNumber[2] == 9) {
+			sprite2->SetTextureHandle(TextureHandle_[9]);
+		}
+
+		// 1の位
+		sprite3->SetTextureHandle(TextureHandle_[eachNumber[3]]);
+
+		if (eachNumber[3] == 0) {
+			sprite3->SetTextureHandle(TextureHandle_[0]);
+		} else if (eachNumber[3] == 1) {
+			sprite3->SetTextureHandle(TextureHandle_[1]);
+		} else if (eachNumber[3] == 2) {
+			sprite3->SetTextureHandle(TextureHandle_[2]);
+		} else if (eachNumber[3] == 3) {
+			sprite3->SetTextureHandle(TextureHandle_[3]);
+		} else if (eachNumber[3] == 4) {
+			sprite3->SetTextureHandle(TextureHandle_[4]);
+		} else if (eachNumber[3] == 5) {
+			sprite3->SetTextureHandle(TextureHandle_[5]);
+		} else if (eachNumber[3] == 6) {
+			sprite3->SetTextureHandle(TextureHandle_[6]);
+		} else if (eachNumber[3] == 7) {
+			sprite3->SetTextureHandle(TextureHandle_[7]);
+		} else if (eachNumber[3] == 8) {
+			sprite3->SetTextureHandle(TextureHandle_[8]);
+		} else if (eachNumber[3] == 9) {
+			sprite3->SetTextureHandle(TextureHandle_[9]);
+		}
+	
 	sprite0->Draw();
 	sprite1->Draw();
 	sprite2->Draw();
@@ -385,7 +393,7 @@ void GameScene::LoadEnemyPopData() {
 
 	// ファイルを開く
 	std::ifstream file;
-	std::string filename = "Resources//obstaclesPop.csv";
+	std::string filename = "Resources//nuts//obstaclesPop.csv";
 	file.open(filename);
 	assert(file.is_open());
 
@@ -489,6 +497,8 @@ void GameScene::CheckAllCollisions() {
 			player_->OnCollision();
 			// 障害物の衝突時コールバックを呼び出す
 			obstacles->OnCollision();
+
+			audio_->PlayWave(soundDataHandle2_);
 		}
 	}
 

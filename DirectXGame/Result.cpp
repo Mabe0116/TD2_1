@@ -1,6 +1,7 @@
 #include "Result.h"
 #include "Tree.h"
 
+
 Result::Result() {}
 
 Result::~Result(){
@@ -33,46 +34,13 @@ void Result::Initialize() {
 	sprite3 = Sprite::Create(TextureHandle_[0], {715.0f, 290.0f});
 	sprite4 = Sprite::Create(TextureHandle_[10], {865.0f, 290.0f});
 
+
+
 }
 
 void Result::Update() {}
 
 void Result::Draw() {
-	// コマンドリストの取得
-	ID3D12GraphicsCommandList* commandList = dxCommon_->GetCommandList();
-
-#pragma region 背景スプライト描画
-	// 背景スプライト描画前処理
-	Sprite::PreDraw(commandList);
-
-	/// <summary>
-	/// ここに背景スプライトの描画処理を追加できる
-	/// </summary>
-
-	// スプライト描画後処理
-	Sprite::PostDraw();
-	// 深度バッファクリア
-	dxCommon_->ClearDepthBuffer();
-#pragma endregion
-
-#pragma region 3Dオブジェクト描画
-	// 3Dオブジェクト描画前処理
-	Model::PreDraw(commandList);
-
-	/// <summary>
-	/// ここに3Dオブジェクトの描画処理を追加できる
-	/// </summary>
-
-	// 3Dオブジェクト描画後処理
-	Model::PostDraw();
-#pragma endregion
-
-#pragma region 前景スプライト描画
-	// 前景スプライト描画前処理
-	Sprite::PreDraw(commandList);
-
-	
-	// スコアの変動
 	int32_t Meter = Tree::GetMeter();
 
 	// 1000の位
@@ -90,29 +58,19 @@ void Result::Draw() {
 	// 1の位
 	eachNumber[3] = Meter;
 
-	// 1000の位
-	sprite0->SetTextureHandle(TextureHandle_[eachNumber[0]]);
-	// 100の位
-	sprite1->SetTextureHandle(TextureHandle_[eachNumber[1]]);
-	// 10の位
-	sprite2->SetTextureHandle(TextureHandle_[eachNumber[2]]);
-	// 1の位
-	sprite3->SetTextureHandle(TextureHandle_[eachNumber[3]]);
 
+		// 1000の位
+		sprite0->SetTextureHandle(TextureHandle_[eachNumber[0]]);
+		// 100の位
+		sprite1->SetTextureHandle(TextureHandle_[eachNumber[1]]);
+		// 10の位
+		sprite2->SetTextureHandle(TextureHandle_[eachNumber[2]]);
+		// 1の位
+		sprite3->SetTextureHandle(TextureHandle_[eachNumber[3]]);
+	
 	sprite0->Draw();
 	sprite1->Draw();
 	sprite2->Draw();
 	sprite3->Draw();
 	sprite4->Draw();
-
-	/// <summary>
-	/// ここに前景スプライトの描画処理を追加できる
-	/// </summary>
-
-	
-
-	// スプライト描画後処理
-	Sprite::PostDraw();
-
-#pragma endregion
 }

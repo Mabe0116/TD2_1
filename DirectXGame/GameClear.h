@@ -8,6 +8,8 @@
 #include "ViewProjection.h"
 #include "WorldTransform.h"
 #include "Scene.h"
+#include"Result.h"
+
 class GameClear {
 public: // メンバ関数
 	/// <summary>
@@ -44,6 +46,8 @@ private: // メンバ変数
 	Input* input_ = nullptr;
 	Audio* audio_ = nullptr;
 	bool isSceneEnd_ = false;
+
+	Result* result_ = nullptr;
 
 	
 	// 画像

@@ -17,6 +17,8 @@ void TitleScene::Initialize() {
 	audio_->PlayWave(soundDataHandle_, true);
 }
 	
+	sprite_ = Sprite::Create(TextureManager::Load("debugfont.png"), {0.0f, 0.0f});
+}
 
 void TitleScene::Update() {
 	

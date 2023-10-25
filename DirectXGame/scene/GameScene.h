@@ -23,6 +23,7 @@
 #include <Skydome.h>
 #include"Scene.h"
 
+
 /// <summary>
 /// ゲームシーン
 /// </summary>
@@ -151,6 +152,10 @@ private: // メンバ変数
 	bool iswait = false;
 	int32_t waitTimer = 0;
 
+	uint32_t soundDataHandle_ = 0;
+
+	uint32_t soundDataHandle2_ = 0;
+	
 
 	/// <summary>
 	/// ゲームシーン用
