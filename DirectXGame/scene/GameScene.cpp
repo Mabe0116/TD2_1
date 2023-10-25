@@ -105,8 +105,7 @@ void GameScene::Initialize() {
 	skydome_->Update();
 	followCamera_->SetTarget(&tree_->GetWorldTransform());
 
-	soundDataHandle_ = audio_->LoadWave("BGM//BGM2.mp3");
-	audio_->PlayWave(soundDataHandle_, true);
+	
 
 	soundDataHandle2_ = audio_->LoadWave("SE//SE.wav");
 

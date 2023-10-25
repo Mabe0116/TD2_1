@@ -2,7 +2,7 @@
 
 TitleScene::TitleScene() {}
 
-TitleScene::~TitleScene(){ delete sprite_; };
+TitleScene::~TitleScene(){ };
 
 void TitleScene::Initialize() {
 	dxCommon_ = DirectXCommon::GetInstance();
@@ -11,14 +11,14 @@ void TitleScene::Initialize() {
 
 	//画像
 	textureHandle_=TextureManager::Load("mrtn.png");
-	sprite_ = Sprite::Create(textureHandle_, {0, 0});
+
 	//音
-	soundDataHandle_ = audio_->LoadWave("BGM.wav");
+	soundDataHandle_ = audio_->LoadWave("BGM//BGM2.wav");
 	audio_->PlayWave(soundDataHandle_, true);
 }
 	
-	sprite_ = Sprite::Create(TextureManager::Load("debugfont.png"), {0.0f, 0.0f});
-}
+	
+
 
 void TitleScene::Update() {
 	
@@ -42,7 +42,7 @@ void TitleScene::Draw() {
 	/// ここに背景スプライトの描画処理を追加できる
 	/// </summary>
 	//画像
-	sprite_->Draw();
+	
 	// スプライト描画後処理
 	Sprite::PostDraw();
 	// 深度バッファクリア
