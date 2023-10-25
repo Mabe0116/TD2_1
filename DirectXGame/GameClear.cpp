@@ -2,7 +2,7 @@
 
 GameClear::GameClear() {}
 
-GameClear::~GameClear() {  };
+GameClear::~GameClear() { };
 
 void GameClear::Initialize() {
 	dxCommon_ = DirectXCommon::GetInstance();
