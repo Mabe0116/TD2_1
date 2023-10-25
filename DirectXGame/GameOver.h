@@ -35,11 +35,17 @@ public: // メンバ関数
 	/// </summary>
 	void Draw();
 
-	
+	   bool IsSceneEnd() { return isSceneEnd_; }
+	Scene::SceneType NextScene() { return Scene::SceneType::kTitle; }
 
 private: // メンバ変数
 	DirectXCommon* dxCommon_ = nullptr;
 	Input* input_ = nullptr;
 	Audio* audio_ = nullptr;
 
+	bool isSceneEnd_ = false;
+
+	// 画像
+	uint32_t textureHandle_ = 0;
+	Sprite* sprite_ = nullptr;
 };
