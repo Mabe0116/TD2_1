@@ -11,6 +11,7 @@
 #include"GameClear.h"
 #include"GameExplanation.h"
 #include "Result.h"
+#include"Obstacles.h"
 
 // Windowsアプリでのエントリーポイント(main関数)
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
@@ -22,6 +23,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	AxisIndicator* axisIndicator = nullptr;
 	PrimitiveDrawer* primitiveDrawer = nullptr;
 	GameScene* gameScene = nullptr;
+	/*Obstacles* obstacles = nullptr;
+	Model* model = nullptr;*/
 
 	// ゲームウィンドウの作成
 	win = WinApp::GetInstance();
@@ -96,7 +99,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	
 		switch (sceneNo) {
 		case Scene::SceneType::kTitle:
-
 			titleScene->Update();
 		
 			if (titleScene->IsSceneEnd()) {
@@ -112,7 +114,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			
 			if (gameexplanation->IsSceneEnd()) {
 				sceneNo = gameexplanation->NextScene();
-				
+				gameScene->Initialize();
+				//obstacles->Initialize(model, float radian, const Vector3& position, Vector3& velocity);
+				gameOver->Initialize();
 			}
 			
 			break;
@@ -124,11 +128,21 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				sceneNo = gameScene->NextScene();
 
 			}
+
+		
+
+			
+
 			break;
 
 		case Scene::SceneType::kGameOver:
 
 			gameOver->Update();
+
+			if (gameOver->IsSceneEnd()) {
+				// 次のシーンの値を代入してシーンを切り替え
+				sceneNo = gameOver->NextScene();
+			}
 
 			break;
 

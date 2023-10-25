@@ -115,6 +115,7 @@ void GameScene::Initialize() {
 
 void GameScene::Update() {
 #ifdef _DEBUG
+	isSceneEnd_ = false;
 	if (input_->TriggerKey(DIK_S)) {
 		isDebugCameraAcctive_ = true;
 	}
@@ -376,7 +377,7 @@ void GameScene::ObstaclesGeneration(const Vector3& position, int radian) {
 
 	Obstacles* obstacles = new Obstacles();
 	
-	const float kObstaclesSpeed = 1.0f;
+	const float kObstaclesSpeed = 0.5f;
 	Vector3 velocity = {0.0f, kObstaclesSpeed, 0.0f};
 	modelobstacles_ = Model::CreateFromOBJ("nuts", true);
 	obstacles->Initialize(modelobstacles_, ToRadian(radian), position, velocity);

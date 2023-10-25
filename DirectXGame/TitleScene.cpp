@@ -2,21 +2,25 @@
 
 TitleScene::TitleScene() {}
 
-TitleScene::~TitleScene(){
-
-};
+TitleScene::~TitleScene(){ delete sprite_; };
 
 void TitleScene::Initialize() {
 	dxCommon_ = DirectXCommon::GetInstance();
 	input_ = Input::GetInstance();
 	audio_ = Audio::GetInstance();
 
+	//画像
+	textureHandle_=TextureManager::Load("mrti.png");
+	sprite_ = Sprite::Create(textureHandle_, {0, 0});
+	
 	
 	
 }
 
 void TitleScene::Update() {
 	
+	isSceneEnd_ = false;
+
 	if (input_->TriggerKey(DIK_SPACE)) {
 		isSceneEnd_ = true;
 	}
@@ -34,9 +38,8 @@ void TitleScene::Draw() {
 	/// <summary>
 	/// ここに背景スプライトの描画処理を追加できる
 	/// </summary>
-
-	
-
+	//画像
+	sprite_->Draw();
 	// スプライト描画後処理
 	Sprite::PostDraw();
 	// 深度バッファクリア
