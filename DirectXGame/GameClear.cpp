@@ -2,17 +2,19 @@
 
 GameClear::GameClear() {}
 
-GameClear::~GameClear(){};
+GameClear::~GameClear() {  };
 
 void GameClear::Initialize() {
 	dxCommon_ = DirectXCommon::GetInstance();
 	input_ = Input::GetInstance();
 	audio_ = Audio::GetInstance();
-
+	result_ = new Result();
+	result_->Initialize();
 	
 }
 
 void GameClear::Update() {
+	result_->Update();
 	if (input_->TriggerKey(DIK_SPACE)) {
 		isSceneEnd_ = true;
 	}
@@ -29,7 +31,7 @@ void GameClear::Draw() {
 	/// <summary>
 	/// ここに背景スプライトの描画処理を追加できる
 	/// </summary>
-
+	
 	// スプライト描画後処理
 	Sprite::PostDraw();
 	// 深度バッファクリア
@@ -51,7 +53,7 @@ void GameClear::Draw() {
 #pragma region 前景スプライト描画
 	// 前景スプライト描画前処理
 	Sprite::PreDraw(commandList);
-
+	result_->Draw();
 	/// <summary>
 	/// ここに前景スプライトの描画処理を追加できる
 	/// </summary>
