@@ -132,6 +132,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		case Scene::SceneType::kGameClear:
 
 			gameclear->Update();
+			if (gameclear->IsSceneEnd()) {
+				sceneNo = gameclear->NextScene();
+			}
 
 			break;
 		}
