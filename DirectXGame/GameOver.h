@@ -8,6 +8,8 @@
 #include "Sprite.h"
 #include "ViewProjection.h"
 #include "WorldTransform.h"
+
+
 class GameOver {
 public: // メンバ関数
 	/// <summary>
