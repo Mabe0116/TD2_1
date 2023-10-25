@@ -20,6 +20,8 @@
 #include <fstream>
 #include <list>
 #include <sstream>
+#include <Skydome.h>
+#include"Scene.h"
 
 /// <summary>
 /// ゲームシーン
@@ -64,7 +66,15 @@ public: // メンバ関数
 
 	void ObstaclesGeneration(const Vector3& position, int radian);
 
-	
+	void CheckAllCollisions();
+
+	void AddMeterCount() { MeterCount += 1; };
+
+	bool IsSceneEnd() { return isSceneEnd_; }
+	Scene::SceneType NextScene() { return Scene::SceneType::kGameOver; }
+
+
+
 private: // メンバ変数
 	DirectXCommon* dxCommon_ = nullptr;
 	Input* input_ = nullptr;
@@ -88,7 +98,8 @@ private: // メンバ変数
 
 	Score* score_ = nullptr;
 
-	//stacles* obstacles_ = nullptr;
+	Obstacles* obstacles_ = nullptr;
+	// 障害物リスト
 	std::list<Obstacles*> obstacless_;
 	Model* modelobstacles_ = nullptr;
 
@@ -106,6 +117,36 @@ private: // メンバ変数
 	// 柱
 	Model* modelTree_ = nullptr;
 	Tree* tree_ = nullptr;
+
+
+	Skydome* skydome_ = nullptr;
+	Model* modelSkydome_ = nullptr;
+
+	
+
+	//スコア変動
+	int32_t eachNumber[4]{};
+
+	int32_t MeterCount = 0;
+
+	//UI
+	uint32_t TextureHandle_[12]{};
+
+	//スコアの描画
+	Sprite* sprite0 = nullptr;
+	Sprite* sprite1 = nullptr;
+	Sprite* sprite2 = nullptr;
+	Sprite* sprite3 = nullptr;
+	Sprite* sprite4 = nullptr;
+
+	//ライフの描画
+	Sprite* sprite5 = nullptr;
+	Sprite* sprite6 = nullptr;
+	Sprite* sprite7 = nullptr;
+
+	bool isSceneEnd_ = false;
+
+	
 
 	/// <summary>
 	/// ゲームシーン用

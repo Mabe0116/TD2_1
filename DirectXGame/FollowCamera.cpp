@@ -8,7 +8,8 @@ void FollowCamera::Initialize() {
 
 	// ビュープロジェクションの初期化
 	viewProjection_.Initialize();
-
+	viewProjection_.farZ = 200.0f;
+	viewProjection_.UpdateMatrix();
 	//worldTransform_.Initialize();
 	//worldTransform_.translation_ = {0.0f, 6.0f, -12.0f};
 	//worldTransform_.rotation_ = {ToRadian(30), 0.0f, 0.0f};

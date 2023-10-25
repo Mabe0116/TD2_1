@@ -31,9 +31,17 @@ public: // メンバ関数
 		 viewProjection_ = viewProjection;
 	 }
 
+	 //ライフ
+	 void SetLife(int32_t Life) { Life_ = Life; };
+
+	 int32_t GetLife() { return Life_; };
 	
+
 	const WorldTransform& GetWorldTransform() { return worldTransforms_[(int)Parts::kBody]; }
 	
+	// 衝突を検出したら呼び出されるコールバック関数
+	void OnCollision();
+
 	// ワールド座標を取得
 	Vector3 GetWorldPosition(){// ワールド座標を入れる変数
 		Vector3 worldPos;
@@ -43,6 +51,8 @@ public: // メンバ関数
 		worldPos.z = worldTransforms_[(int)Parts::kBody].matWorld_.m[3][2];
 		return worldPos;
 	};
+
+	 bool IsDead() const { return isDead_; }
 
 private:	// メンバ変数
   // キーボード入力
@@ -79,4 +89,9 @@ private:	// メンバ変数
 	int32_t leftHandRotate_ = 0u;
 	int32_t rightHandRotate_ = 0u;
 	int32_t rotationSpeed_ = 1;
+
+	//ライフ
+	int32_t Life_ = 0;
+
+	bool isDead_ = false;
 };

@@ -16,9 +16,12 @@ public:
 
 	void Draw(ViewProjection& viewProojection);
 
-	void SetGameScene(GameScene* gameScene) { gameScene_ = gameScene; }
+	// 衝突を検出したら呼び出されるコールバック関数
+	void OnCollision();
 
-	
+	void Position();
+
+	bool IsDead() const { return isDead_; }
 
 	/// 親となるワールドトランスフォームをセット
 	/// </summary>
@@ -39,7 +42,6 @@ public:
 		//どの角度に行くかのランダムな変数
 		float radian_;
 
-		GameScene* gameScene_ = nullptr;
 		//障害物の落下速度
 		Vector3 velocity_;
 		//条件式に入れる用のランダムな変数
@@ -49,5 +51,6 @@ public:
 		//スタート開始から何秒か待つ用の変数
 	    int32_t timer_;
 	    int32_t timerspeed_;
-
+	    // デスフラグ
+	    bool isDead_ = false;
 };
