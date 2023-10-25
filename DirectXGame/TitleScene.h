@@ -8,6 +8,8 @@
 #include "ViewProjection.h"
 #include "WorldTransform.h"
 #include "Scene.h"
+#include "Sprite.h"
+
 class TitleScene {
 
 	public:
@@ -43,6 +45,6 @@ class TitleScene {
 	    Audio* audio_ = nullptr;
 	  
 		bool isSceneEnd_ = false;
-	   
+	    Sprite* sprite_;
 
 };

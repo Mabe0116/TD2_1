@@ -12,7 +12,7 @@ void TitleScene::Initialize() {
 	audio_ = Audio::GetInstance();
 
 	
-
+	sprite_ = Sprite::Create(TextureManager::Load("debugfont.png"), {0.0f, 0.0f});
 }
 
 void TitleScene::Update() {
@@ -34,6 +34,8 @@ void TitleScene::Draw() {
 	/// <summary>
 	/// ここに背景スプライトの描画処理を追加できる
 	/// </summary>
+
+	sprite_->Draw();
 
 	// スプライト描画後処理
 	Sprite::PostDraw();

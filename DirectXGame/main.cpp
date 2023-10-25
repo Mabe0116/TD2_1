@@ -10,6 +10,7 @@
 #include"GameOver.h"
 #include"GameClear.h"
 #include"GameExplanation.h"
+#include "Result.h"
 
 // Windowsアプリでのエントリーポイント(main関数)
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
@@ -53,6 +54,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	// 3Dモデル静的初期化
 	Model::StaticInitialize();
 
+	Result* result = new Result();
+	result->Initialize();
+
 	// 軸方向表示初期化
 	axisIndicator = AxisIndicator::GetInstance();
 	axisIndicator->Initialize();
@@ -61,7 +65,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	primitiveDrawer->Initialize();
 #pragma endregion
 
-	// ゲームシーンの初期化
 	gameScene = new GameScene();
 	gameScene->Initialize();
 
@@ -87,7 +90,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		if (win->ProcessMessage()) {
 			break;
 		}
-
 		// ImGui受付開始
 		imguiManager->Begin();
 		// 入力関連の毎フレーム処理
@@ -119,11 +121,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				sceneNo = gameScene->NextScene();
 
 			}
-
-		
-
-			
-
 			break;
 
 		case Scene::SceneType::kGameOver:
@@ -142,11 +139,15 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			break;
 		}
 
+	
+		////リザルトの毎フレーム処理
+		//result->Update();
+		
 		// 軸表示の更新
 		axisIndicator->Update();
 		// ImGui受付終了
 		imguiManager->End();
-
+		
 		// 描画開始
 		dxCommon->PreDraw();
 		
@@ -172,6 +173,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			break;
 		}
 
+		////リザルト画面
+		//result->Draw();
+		
 		// 軸表示の描画
 		axisIndicator->Draw();
 		// プリミティブ描画のリセット
@@ -184,12 +188,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	// 各種解放
 	SafeDelete(gameScene);
+	SafeDelete(result);
 	audio->Finalize();
 	// ImGui解放
 	imguiManager->Finalize();
 
-	// ゲームウィンドウの破棄
-	win->TerminateGameWindow();
+		// ゲームウィンドウの破棄
+		win->TerminateGameWindow();
 
-	return 0;
-}
+		return 0;
+	}

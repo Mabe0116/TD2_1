@@ -9,6 +9,7 @@ Player::~Player() {
 	delete hand_;
 }
 
+
 void Player::Initialize() {
 	// シングルトンインスタンスを取得する
 	input_ = Input::GetInstance();
@@ -42,7 +43,7 @@ void Player::Initialize() {
 		worldTransforms_[i].Initialize();
 	}
 
-	worldTransforms_[static_cast<int>(Parts::kBody)].rotation_ = {ToRadian(270), -ToRadian(0), 0};
+	worldTransforms_[static_cast<int>(Parts::kBody)].rotation_ = {ToRadian(270), -ToRadian(0), ToRadian(180)};
 	worldTransforms_[static_cast<int>(Parts::kBody)].translation_ = {0, 0.0f, -13};
 	worldTransforms_[static_cast<int>(Parts::kLeftLeg)].translation_ = {0, -2.5f, 0};
 	worldTransforms_[static_cast<int>(Parts::kRightLeg)].translation_ = {0, -2.5f, 0};
