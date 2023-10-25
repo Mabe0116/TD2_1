@@ -109,8 +109,9 @@ void GameScene::Initialize() {
 }
 
 void GameScene::Update() {
-#ifdef _DEBUG
 	isSceneEnd_ = false;
+#ifdef _DEBUG
+	
 	if (input_->TriggerKey(DIK_S)) {
 		isDebugCameraAcctive_ = true;
 	}
@@ -134,7 +135,7 @@ void GameScene::Update() {
 
 	player_->Update();
 	tree_->Update();
-
+	
 	if (input_->TriggerKey(DIK_S)) {
 		audio_->StopWave(soundDataHandle_);
 	}

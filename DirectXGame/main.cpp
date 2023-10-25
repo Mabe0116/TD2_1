@@ -23,8 +23,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	AxisIndicator* axisIndicator = nullptr;
 	PrimitiveDrawer* primitiveDrawer = nullptr;
 	GameScene* gameScene = nullptr;
-	/*Obstacles* obstacles = nullptr;
-	Model* model = nullptr;*/
+	//Obstacles* obstacles = nullptr;
+	//Model* model = nullptr;
 
 	// ゲームウィンドウの作成
 	win = WinApp::GetInstance();
@@ -115,6 +115,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				gameScene->Initialize();
 				//obstacles->Initialize(model, float radian, const Vector3& position, Vector3& velocity);
 				gameOver->Initialize();
+				// リザルトの毎フレーム処理
+				result->Initialize();
 			}
 			
 			break;
@@ -155,8 +157,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		}
 
 	
-		////リザルトの毎フレーム処理
-		//result->Update();
+		
 		
 		// 軸表示の更新
 		axisIndicator->Update();
@@ -177,10 +178,14 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		case Scene::SceneType::kGamePlay:
 			// ゲームシーンの描画
 			gameScene->Draw();
+			// リザルトの毎フレーム処理
+			result->Update();
 			break;
 
 		case Scene::SceneType::kGameOver:
 			gameOver->Draw();
+			// リザルト画面
+			result->Draw();
 			break;
 
 		case Scene::SceneType::kGameClear:
@@ -188,8 +193,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			break;
 		}
 
-		////リザルト画面
-		//result->Draw();
+		
 		
 		// 軸表示の描画
 		axisIndicator->Draw();

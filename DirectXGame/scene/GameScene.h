@@ -71,7 +71,7 @@ public: // メンバ関数
 	void AddMeterCount() { MeterCount += 1; };
 
 	bool IsSceneEnd() { return isSceneEnd_; }
-	Scene::SceneType NextScene() { return Scene::SceneType::kGameClear; }
+	Scene::SceneType NextScene() { return Scene::SceneType::kGameOver; }
 
 
 

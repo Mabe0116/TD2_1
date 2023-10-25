@@ -10,11 +10,10 @@ void TitleScene::Initialize() {
 	audio_ = Audio::GetInstance();
 
 	//画像
-	textureHandle_=TextureManager::Load("mrti.png");
+	textureHandle_=TextureManager::Load("mrtn.png");
 	sprite_ = Sprite::Create(textureHandle_, {0, 0});
-	
-	sprite_ = Sprite::Create(TextureManager::Load("debugfont.png"), {0.0f, 0.0f});
 }
+	
 
 void TitleScene::Update() {
 	
