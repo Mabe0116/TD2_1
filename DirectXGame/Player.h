@@ -37,6 +37,7 @@ public: // メンバ関数
 	 int32_t GetLife() { return Life_; };
 	
 
+
 	const WorldTransform& GetWorldTransform() { return worldTransforms_[(int)Parts::kBody]; }
 	
 	// 衝突を検出したら呼び出されるコールバック関数

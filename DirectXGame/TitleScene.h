@@ -8,6 +8,8 @@
 #include "ViewProjection.h"
 #include "WorldTransform.h"
 #include "Scene.h"
+#include "Sprite.h"
+
 class TitleScene {
 
 	public:
@@ -47,4 +49,5 @@ class TitleScene {
 		// 画像
 	    uint32_t textureHandle_ = 0;
 		Sprite*sprite_=nullptr;
+
 };
