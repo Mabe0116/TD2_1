@@ -119,6 +119,7 @@ void GameScene::Update() {
 	if (input_->TriggerKey(DIK_S)) {
 		isDebugCameraAcctive_ = true;
 	}
+#endif
 	if (isDebugCameraAcctive_) {
 
 		debugCamera_->Update();
@@ -135,7 +136,6 @@ void GameScene::Update() {
 		// ビュープロジェクション行列の更新と転送
 		// viewProjection_.UpdateMatrix();
 	}
-#endif
 
 	player_->Update();
 	tree_->Update();
