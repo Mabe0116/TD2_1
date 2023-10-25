@@ -45,6 +45,10 @@ class TitleScene {
 	    Audio* audio_ = nullptr;
 	  
 		bool isSceneEnd_ = false;
+	   
+		// 画像
+	    uint32_t textureHandle_ = 0;
+		Sprite*sprite_=nullptr;
 	    Sprite* sprite_;
 
 };
