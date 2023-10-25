@@ -73,7 +73,7 @@ public: // メンバ関数
 	bool IsSceneEnd() { return isSceneEnd_; }
 	Scene::SceneType NextScene() { return Scene::SceneType::kGameOver; }
 
-
+	void GameReset();
 
 private: // メンバ変数
 	DirectXCommon* dxCommon_ = nullptr;
@@ -146,8 +146,11 @@ private: // メンバ変数
 
 	bool isSceneEnd_ = false;
 
-	uint32_t soundDataHandle_ = 0;
 	
+	
+	bool iswait = false;
+	int32_t waitTimer = 0;
+
 
 	/// <summary>
 	/// ゲームシーン用

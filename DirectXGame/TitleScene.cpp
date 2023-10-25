@@ -12,6 +12,9 @@ void TitleScene::Initialize() {
 	//画像
 	textureHandle_=TextureManager::Load("mrtn.png");
 	sprite_ = Sprite::Create(textureHandle_, {0, 0});
+	//音
+	soundDataHandle_ = audio_->LoadWave("BGM.wav");
+	audio_->PlayWave(soundDataHandle_, true);
 }
 	
 
