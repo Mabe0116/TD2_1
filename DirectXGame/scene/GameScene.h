@@ -23,6 +23,7 @@
 #include <Skydome.h>
 #include"Scene.h"
 
+
 /// <summary>
 /// ゲームシーン
 /// </summary>
@@ -147,6 +148,8 @@ private: // メンバ変数
 	bool isSceneEnd_ = false;
 
 	uint32_t soundDataHandle_ = 0;
+
+	uint32_t soundDataHandle2_ = 0;
 	
 
 	/// <summary>

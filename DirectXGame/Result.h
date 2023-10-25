@@ -8,6 +8,9 @@
 #include "Score.h"
 #include "ViewProjection.h"
 #include "WorldTransform.h"
+
+
+
 class Result {
 public: // メンバ関数
 	/// <summary>
@@ -55,4 +58,6 @@ private: // メンバ変数
 
 	// スコア変動
 	int32_t eachNumber[4]{};
+
+
 };
