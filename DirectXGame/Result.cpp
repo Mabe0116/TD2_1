@@ -1,7 +1,6 @@
 #include "Result.h"
 #include "Tree.h"
 
-
 Result::Result() {}
 
 Result::~Result(){
@@ -33,9 +32,6 @@ void Result::Initialize() {
 	sprite2 = Sprite::Create(TextureHandle_[0], {565.0f, 290.0f});
 	sprite3 = Sprite::Create(TextureHandle_[0], {715.0f, 290.0f});
 	sprite4 = Sprite::Create(TextureHandle_[10], {865.0f, 290.0f});
-
-
-
 }
 
 void Result::Update() {}
@@ -58,16 +54,15 @@ void Result::Draw() {
 	// 1の位
 	eachNumber[3] = Meter;
 
+	// 1000の位
+	sprite0->SetTextureHandle(TextureHandle_[eachNumber[0]]);
+	// 100の位
+	sprite1->SetTextureHandle(TextureHandle_[eachNumber[1]]);
+	// 10の位
+	sprite2->SetTextureHandle(TextureHandle_[eachNumber[2]]);
+	// 1の位
+	sprite3->SetTextureHandle(TextureHandle_[eachNumber[3]]);
 
-		// 1000の位
-		sprite0->SetTextureHandle(TextureHandle_[eachNumber[0]]);
-		// 100の位
-		sprite1->SetTextureHandle(TextureHandle_[eachNumber[1]]);
-		// 10の位
-		sprite2->SetTextureHandle(TextureHandle_[eachNumber[2]]);
-		// 1の位
-		sprite3->SetTextureHandle(TextureHandle_[eachNumber[3]]);
-	
 	sprite0->Draw();
 	sprite1->Draw();
 	sprite2->Draw();

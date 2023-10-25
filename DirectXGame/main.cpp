@@ -57,9 +57,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	// 3Dモデル静的初期化
 	Model::StaticInitialize();
 
-	Result* result = new Result();
-	result->Initialize();
-
+	
 	// 軸方向表示初期化
 	axisIndicator = AxisIndicator::GetInstance();
 	axisIndicator->Initialize();
@@ -116,8 +114,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				sceneNo = gameexplanation->NextScene();
 				gameScene->Initialize();
 				gameOver->Initialize();
-				// リザルトの毎フレーム処理
-				result->Initialize();
 				gameScene->GameReset();
 			}
 			
@@ -138,7 +134,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			break;
 
 		case Scene::SceneType::kGameOver:
-
+			
 			gameOver->Update();
 
 			if (gameOver->IsSceneEnd()) {
@@ -148,14 +144,14 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 			break;
 
-		case Scene::SceneType::kGameClear:
+		//case Scene::SceneType::kGameClear:
 
-			gameclear->Update();
-			if (gameclear->IsSceneEnd()) {
-				sceneNo = gameclear->NextScene();
-			}
+		//	gameclear->Update();
+		//	if (gameclear->IsSceneEnd()) {
+		//		sceneNo = gameclear->NextScene();
+		//	}
 
-			break;
+		//	break;
 		}
 
 	
@@ -180,14 +176,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		case Scene::SceneType::kGamePlay:
 			// ゲームシーンの描画
 			gameScene->Draw();
-			// リザルトの毎フレーム処理
-			result->Update();
+		
 			break;
 
 		case Scene::SceneType::kGameOver:
 			gameOver->Draw();
-			// リザルト画面
-			result->Draw();
 			break;
 
 		case Scene::SceneType::kGameClear:
@@ -209,7 +202,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	// 各種解放
 	SafeDelete(gameScene);
-	SafeDelete(result);
 	audio->Finalize();
 	// ImGui解放
 	imguiManager->Finalize();

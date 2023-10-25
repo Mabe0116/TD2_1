@@ -8,6 +8,7 @@
 #include "Sprite.h"
 #include "ViewProjection.h"
 #include "WorldTransform.h"
+#include"Result.h"
 class GameOver {
 public: // メンバ関数
 	/// <summary>
@@ -48,4 +49,5 @@ private: // メンバ変数
 	// 画像
 	uint32_t textureHandle_ = 0;
 	Sprite* sprite_ = nullptr;
+	Result* result_;
 };

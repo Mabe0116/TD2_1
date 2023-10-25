@@ -2,9 +2,7 @@
 
 GameOver::GameOver() {}
 
-GameOver::~GameOver(){
-
-};
+GameOver::~GameOver(){ delete result_; };
 
 void GameOver::Initialize() {
 	dxCommon_ = DirectXCommon::GetInstance();
@@ -14,10 +12,14 @@ void GameOver::Initialize() {
 	// 画像
 	textureHandle_ = TextureManager::Load("mrti.png");
 	sprite_ = Sprite::Create(textureHandle_, {0, 0});
+	result_ = new Result();
+	result_->Initialize();
 }
 
 void GameOver::Update() {
 	isSceneEnd_ = false;
+	// リザルトの毎フレーム処理
+	result_->Update();
 	if (input_->TriggerKey(DIK_SPACE)) {
 		isSceneEnd_ = true;
 	}
@@ -62,7 +64,7 @@ void GameOver::Draw() {
 	/// <summary>
 	/// ここに前景スプライトの描画処理を追加できる
 	/// </summary>
-
+	result_->Draw();
 	
 
 	// スプライト描画後処理
