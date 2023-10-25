@@ -54,7 +54,11 @@ void Obstacles::Draw(ViewProjection& viewProjection) {
 	}
 }
 
-void Obstacles::OnCollision() { worldTransform_.translation_.y = 50; }
+void Obstacles::OnCollision() {
+	isDead_ = true;
+	// worldTransform_.translation_.y = 50; 
+
+}
 
 void Obstacles::SetParent(const WorldTransform* parent) {
 	// 親子関係を結ぶ

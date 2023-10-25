@@ -72,9 +72,9 @@ public: // メンバ関数
 	void AddMeterCount() { MeterCount += 1; };
 
 	bool IsSceneEnd() { return isSceneEnd_; }
-	Scene::SceneType NextScene() { return Scene::SceneType::kGameClear; }
+	Scene::SceneType NextScene() { return Scene::SceneType::kGameOver; }
 
-
+	void GameReset();
 
 private: // メンバ変数
 	DirectXCommon* dxCommon_ = nullptr;
@@ -146,6 +146,11 @@ private: // メンバ変数
 	Sprite* sprite7 = nullptr;
 
 	bool isSceneEnd_ = false;
+
+	
+	
+	bool iswait = false;
+	int32_t waitTimer = 0;
 
 	uint32_t soundDataHandle_ = 0;
 

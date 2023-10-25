@@ -114,8 +114,9 @@ void GameScene::Initialize() {
 }
 
 void GameScene::Update() {
-#ifdef _DEBUG
 	isSceneEnd_ = false;
+#ifdef _DEBUG
+	
 	if (input_->TriggerKey(DIK_S)) {
 		isDebugCameraAcctive_ = true;
 	}
@@ -143,6 +144,7 @@ void GameScene::Update() {
 	if (input_->TriggerKey(DIK_S)) {
 		audio_->StopWave(soundDataHandle_);
 	}
+	
 	
 	for (Obstacles* obstacles : obstacless_) {
 		obstacles->Update();
@@ -387,6 +389,8 @@ void GameScene::ObstaclesGeneration(const Vector3& position, int radian) {
 
 void GameScene::LoadEnemyPopData() {
 
+	enemyPopCommands.clear();
+
 	// ファイルを開く
 	std::ifstream file;
 	std::string filename = "Resources//nuts//obstaclesPop.csv";
@@ -401,15 +405,14 @@ void GameScene::LoadEnemyPopData() {
 }
 
 void GameScene::UpdateEnemyPopCommands() {
-	bool iswait = false;
-	int32_t waitTimer = 0;
-
+	
 	// 待機処理
 	if (iswait) {
 		waitTimer--;
 		if (waitTimer <= 0) {
 			// 待機完了
 			iswait = false;
+			waitTimer = 0;
 		}
 		return;
 	}
@@ -462,7 +465,7 @@ void GameScene::UpdateEnemyPopCommands() {
 
 			// コマンドループを抜ける
 			break;
-		}
+		} 
 	}
 }
 
@@ -500,6 +503,16 @@ void GameScene::CheckAllCollisions() {
 	}
 
 
+}
+
+void GameScene::GameReset() {
+	// ここにシーンを再開するために必要な初期化を書く
+	for (Obstacles* obstacles : obstacless_) {
+		obstacles->OnCollision();
+	}
+	player_->Initialize();
+	Tree::SetMeter(0);
+	LoadEnemyPopData();
 }
 
 
